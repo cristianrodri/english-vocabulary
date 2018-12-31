@@ -1,0 +1,23 @@
+{
+  "name": "Vocabulary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "babel": "babel ./src/js/ --watch --out-dir ./public/js/",
+    "pug": "pug -w ./src/pug/ -o ./public/",
+    "sass": "node-sass -w -o ./public/css/ ./src/scss/"
+  },
+  "keywords": [],
+  "author": "Cristian Rodriguez",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "pug-cli": "^1.0.0-alpha6"
+  },
+  "dependencies": {
+    "node-sass": "^4.9.2"
+  }
+}

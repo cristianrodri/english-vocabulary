@@ -1,0 +1,63 @@
+.main-vocabulary {
+  margin-right: var(--gutter);
+  margin-left: var(--gutter);
+}
+
+.table-cont {
+  overflow: auto;
+}
+
+.container-table {
+  --bg-color: hsla(241, 100%, 50%, .7);
+
+  margin: 0 auto;
+  width: 50%;
+  min-width: 600px;
+  table-layout: fixed;
+  text-align: center;
+  margin-bottom: var(--gutter);
+  font-size: var(--little-big);
+
+  &__type {
+    width: 90px;
+    background-color: var(--bg-color);
+    cursor: pointer;
+  }
+
+  &__word {
+    --bg-color: hsla(120, 11%, 4%, 0.7);
+
+    width: 90px;
+    color: hsl(0, 0, 100);
+    font-size: var(--little-big);
+    background-color: var(--bg-color);
+    transition: all .5s;
+
+    &:hover {
+      transform: scale(1.5);
+      --bg-color: hsla(120, 11%, 4%, 1);
+      z-index: 100;
+
+      // .es-word {
+      //   transform: translateX(calc(-50% + 1.5rem));
+      // }
+
+      // .eng-word {
+      //   transform: translateX(calc(50% - 1.5rem));
+      // }
+    }
+  }
+
+  &__title-eng,
+  &__title-es {
+    padding: 0.3em;
+    color: color(medium-white);
+  }
+
+}
+
+.eng-word,
+.es-word {
+  padding: 0.5em;
+  transition: all .5s;
+}

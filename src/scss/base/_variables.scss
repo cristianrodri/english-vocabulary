@@ -1,0 +1,42 @@
+// Variables
+:root {
+  --primary-color: hsl(194, 50%, 60%);
+  --secondary-color: hsl(240, 83%, 9%);
+  --color-title: yellow;
+  --gutter: 16px;
+
+  // Font sizes
+  --h1: 1.4rem;
+  --h2: 1.2rem;
+  --little-big: 1.1rem;
+  --base: 1rem;
+  --small: 0.8rem;
+}
+
+// Layout
+$gutter: 16px;
+
+// Font sizes
+$h1: 24px;
+$h2: 19px;
+$logo-size: 20px;
+$nav-size: 20px;
+$type-size: 20px;
+$word-size: 20px;
+
+// Colors
+$colors: (
+  light-black: hsl(0, 1%, 15%),
+  medium-black: hsl(0, 3%, 6%),
+  medium-gray: hsl(0, 2%, 46%),
+  light-gray: hsl(0, 1%, 86%),
+  medium-white: hsl(0, 17%, 95%),
+  funny-logo: hsl(51, 87%, 12%),
+  vocabulary-logo: rgb(29, 3, 29),
+  card-title: hsl(251, 72%, 25%)
+);
+
+// Functions
+@function color($val) {
+  @return map-get($colors, $val);
+}

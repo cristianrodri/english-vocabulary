@@ -1,0 +1,42 @@
+.main-header {
+  width: 100%;
+  display: flex;
+  background-color: var(--secondary-color);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-logo {
+  margin-left: var(--gutter);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__link {
+    height: 100%;
+  }
+}
+
+.main-menu {
+  $pad-mar: 13px;
+
+  margin: $pad-mar 0;
+  display: flex;
+  align-items: center;
+  font-size: $nav-size;
+
+  &__link {
+    padding: $pad-mar;
+    color: var(--primary-color);
+    text-align: center;
+    opacity: .6;
+    transition: opacity .3s;
+
+    &:hover {
+      background-color: var(--secondary-color);
+      opacity: 1;
+    }
+  }
+}

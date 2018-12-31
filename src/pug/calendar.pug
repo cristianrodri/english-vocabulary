@@ -1,0 +1,30 @@
+extends templates/template.pug
+
+append config
+  -pageTitle = 'Calendar'
+
+block main
+  include blocks/table.pug
+    +word('Lunes', 'Monday')
+    +word('Martes', 'Tuesday')
+    +word('Miércoles', 'Wednesday')
+    +word('Jueves', 'Thursday')
+    +word('Viernes', 'Friday')
+    +word('Sábado', 'Saturday')
+    +word('Domingo', 'Sunday')
+    +word('Enero', 'January')
+    +word('Febrero', 'February')
+    +word('Marzo', 'March')
+    +word('Abril', 'April')
+    +word('May', 'Mayo')
+    +word('Junio', 'June')
+    +word('Julio', 'July')
+    +word('Agosto', 'August')
+    +word('Septiembre', 'September')
+    +word('Octubre', 'October')
+    +word('Noviembre', 'November')
+    +word('Diciembre', 'December')
+    +word('Verano', 'Summer')
+    +word('Invierno', 'Winter')
+    +word('Primavera', 'Spring')
+    +word('Otoño', 'Autumn')
