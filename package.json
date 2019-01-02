@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "babel": "babel ./src/js/ --watch --out-dir ./public/js/",
-    "pug": "pug -w ./src/pug/ -o ./public/",
-    "sass": "node-sass -w -o ./public/css/ ./src/scss/"
+    "babel": "babel ./src/js/ --watch --out-dir ./dist/js/",
+    "pug": "pug -w ./src/pug/ -o ./dist/",
+    "sass": "node-sass -w -o ./dist/css/ ./src/scss/"
   },
   "keywords": [],
   "author": "Cristian Rodriguez",
