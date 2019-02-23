@@ -1,0 +1,51 @@
+block config
+  include /includes/config.pug
+  include /includes/cards.pug
+
+//- Don't forget to put open graph, twitter and schemas
+
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="description", content=description)
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title #{pageTitle} - #{siteTitle}
+    //- link(rel="stylesheet", href="css/styles.css")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Lato:400,400i,700")
+    //- link(rel="shortcut icon", href="/img/icon.png")
+  body
+    //- Header (all pages)
+    header.main-header
+      .container-logo
+        a(href="/").container-logo__link
+          picture
+            source(srcset="/assets/icon.webp", type="image/webp")
+            source(srcset="/assets/icon.png", type="image/png")
+            img(srcset="/assets/icon.png", alt="Logo").container-logo__img
+      nav.main-nav
+        ul.main-menu
+          li.main-menu__item: a(href="/").main-menu__link Home
+          li.main-menu__item: a(href="/about-us.html").main-menu__link About us
+
+    block title
+      if title
+        h1.main-title #{title}
+      else
+        h1.main-title #{pageTitle}
+
+    //- Main content
+    //- If it has title, it means homepage. Else it's' vocabulary pages
+    if title
+      main(role="main").main-content
+        block main
+    else
+      main(role="main").main-vocabulary
+        block main
+
+    //- Footer (all pages)
+    footer
+
+    //- unless title
+      //- script(src=scripts)

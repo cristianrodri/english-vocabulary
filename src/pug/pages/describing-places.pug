@@ -1,0 +1,33 @@
+extends /includes/template.pug
+
+append config
+  -pageTitle = 'Describing Places'
+
+block main
+  include /includes/table.pug
+    +word('Vigorizante', 'Invigorating')
+    +word('Enervante (sentirse agotado)', 'Enervating')
+    +word('Fascinante', 'Fascinating')
+    +word('Energético', 'Energetic')
+    +word('Rápido', 'Fast')
+    +word('Vibrante', 'Vibrant')
+    +word('Animado', 'Lively')
+    +word('Emocionado', 'Exciting')
+    +word('Lleno', 'Packed')
+    +word('Lleno de gente, multitud', 'Crowded')
+    +word('Ocupado', 'Busy')
+    +word('Bullicioso', 'Bustling')
+    +word('Moda', 'Trendy')
+    +word('Turístico', 'Touristy')
+    +word('Moderno', 'Modern')
+    +word('Histórico', 'Historic')
+    +word('Pasado de moda', 'Old-fashioned')
+    +word('Anticuado', 'Outdated')
+    +word('Pintoresco', 'Picturesque')
+    +word('Lindo(a)', 'Cute')
+    +word('Caro', 'Pricey')
+    +word('Demasiado caro', 'Over-priced')
+    +word('De gama alta', 'Upmarket')
+    +word('Cosmopolita', 'Cosmopolitan')
+    +word('Metropolitano', 'Metropolitan')
+    +word('Neopolitan', 'Neopolitan')

@@ -1,3 +1,5 @@
+import '../scss/styles.scss'
+
 // Capturar la tabla y palabras
 const containerTable = document.getElementById('container-table')
 const parent = containerTable.querySelector('tbody')
@@ -26,12 +28,15 @@ const start = child => {
   parent.appendChild(fragment)
 }
 
-// Si se hace click en English
-englishWord.addEventListener('click', () => {
-  start(0)
-})
-
-// Si se hace click en Spanish
-spanishWord.addEventListener('click', () => {
-  start(count)
-})
+if (englishWord && spanishWord) {
+  
+  // Si se hace click en English
+  englishWord.addEventListener('click', () => {
+    start(0)
+  })
+  
+  // Si se hace click en Spanish
+  spanishWord.addEventListener('click', () => {
+    start(count)
+  })
+}

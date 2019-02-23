@@ -1,0 +1,9 @@
+extends /includes/template.pug
+
+append config
+  -pageTitle = 'Other Vocabulary'
+
+block main
+  include /includes/table.pug
+    +word('Tiempo libre', 'Spare time')
+    +word('Hacer mandados', 'Do errands')

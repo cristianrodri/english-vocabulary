@@ -1,0 +1,15 @@
+extends /includes/template.pug
+
+append config
+  -pageTitle = 'Possessive Adjectives'
+
+block main
+  include /includes/table.pug
+    +word('Mi', 'My')
+    +word('Your', 'Tu, tus')
+    +word('His', 'Su (de él)')
+    +word('Her', 'Su (de ella)')
+    +word('Its', 'Su (del neutro)')
+    +word('Our', 'Nuestro(a)')
+    +word('Your', 'Su, sus')
+    +word('Your', 'Su, sus (de ellos)')
