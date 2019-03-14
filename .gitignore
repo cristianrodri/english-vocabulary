@@ -3,3 +3,4 @@ dist/
 public/
 types.md
 workflow.md
+.gitignore

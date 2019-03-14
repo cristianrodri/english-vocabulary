@@ -8,35 +8,53 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin')
 const fs = require('fs')
 const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin')
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
-let templates = [];
-let dir = './src/pug/pages';
-let files = fs.readdirSync(dir);
+let folder = 'src/pug/pages/'
+let folderLength = folder.length
+let templates = []
 
-files.forEach(file => {
-  if (file.match(/\.pug$/)) {
-    let filename = file.substring(0, file.length - 4);
-    templates.push(
-      new HtmlWebpackPlugin({
-        favicon: './src/img/icon.png',
-        template: dir + '/' + filename + '.pug',
-        filename: filename + '.html',
-        inject: true
-      })
-    );
-  }
-});
+const traverseDir = dir => {
+  fs.readdirSync(dir).forEach(file => {
+    let fullPath = path.join(dir, file);
 
+    // If it has subfolder
+    if (fs.lstatSync(fullPath).isDirectory()) {
+      // Call function recursively
+      traverseDir(fullPath);
+    } else {
+      let extractPath = folderLength
+      let extractPugExt = fullPath.indexOf('.pug')
+      let extractFile = fullPath.substring(extractPath, extractPugExt)
+        templates.push(
+          new HtmlWebpackPlugin({
+            favicon: './src/img/icon.png',
+            template: fullPath,
+            filename: extractFile + '.html',
+            inject: true
+          })
+        )
+     }
+  })
+}
+
+traverseDir(folder)
+
+const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   entry: {
     js: './src/js/index.js'
   },
+  mode: 'none',
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
   },
+  // devServer: {
+  //   hot: true,
+  //   contentBase: path.join(__dirname, './src/pug'),
+  //   watchContentBase: true
+  // },
   devtool: 'source-map',
   module: {
     rules: [
@@ -61,7 +79,7 @@ module.exports = {
             options: {
               basedir: path.join(__dirname, './src/pug')
             }
-          }
+          },
         ]
       },
       {
@@ -98,14 +116,14 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['dist/**/*.*']),
-    new MiniCssExtractPlugin({
-      filename: '[name].[chunkhash].css',
-      // filename: 'output.css',
-      chunkFilename: '[id].css'
-    }),
+    new CleanWebpackPlugin('dist'),
     ...templates,
     new HtmlWebpackPugPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash].css',
+      // filename: 'output.css',
+      chunkFilename: '[id].[hash].css'
+    }),
     // new HtmlWebpackPlugin({
     //   favicon: './src/img/icon.png',
     //   template: './src/pug/index.pug',
@@ -132,6 +150,6 @@ module.exports = {
       overrideExtension: true,
       detailedLogs: false,
       strict: true
-    })
+    }),
   ]
 }

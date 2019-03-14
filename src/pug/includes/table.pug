@@ -1,10 +1,12 @@
 mixin word(esWord, ...engWord)
-  -count = 0
+  -let count = 0
   tr.container-table__word
     while count < engWord.length
       td.eng-word #{engWord[count]}
       -count++
     td.es-word #{esWord}
+
+//- button.u-button#hear-vocabulary Hear Vocabulary
 
 .table-cont
   table.container-table#container-table
