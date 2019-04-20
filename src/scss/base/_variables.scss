@@ -1,7 +1,11 @@
 // Variables
 :root {
-  --primary-color: hsl(194, 50%, 60%);
-  --secondary-color: hsl(240, 83%, 9%);
+  --primary-color: #282D31;
+  --primary-color-alpha: rgba(40, 45, 49, .8);
+  --secondary-color: #673CC9;
+  --secondary-color-alpha: rgba(103, 60, 201, .8);
+  --third-color: #E4336F;
+  --third-color-alpha: rgba(228, 51, 111, .8);
   --color-title: yellow;
   --gutter: 16px;
 
@@ -12,6 +16,11 @@
   --base: 1rem;
   --small: 0.8rem;
 }
+
+// Sass variables
+$primary-color: #282D31;
+$secondary-color: #673CC9;
+$third-color: #E4336F;
 
 // Layout
 $gutter: 16px;

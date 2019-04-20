@@ -12,30 +12,57 @@ const getVoice = () => {
   })
 }
 
+const hearEnglish = (children, synth, containerWord, voices) => {
+  // console.log(children)
+
+  children.some((child, i, arr) => {
+
+    if (i < arr.length - 1) {
+      // English word
+      let wordEng = new SpeechSynthesisUtterance(child.textContent)
+      wordEng.voice = voices[4]
+      synth.speak(wordEng)
+      wordEng.addEventListener('start', e => {
+        containerWord.classList.add('u-scaleUp')
+      })
+      if (i === 0) {
+      }
+    } else {
+      return true
+    }
+  })
+}
+
 const speaks = voices => {
   const allWords = Array.from(document.querySelectorAll('.container-table__word'))
+  // console.log(allWords[0].children)
 
-  allWords.forEach(word => {
-    const engWord = word.firstChild.textContent
-    const esWord = word.lastChild.textContent
+  allWords.map(containerWord => {
+    const children = Array.from(containerWord.children)
+    const esWord = containerWord.lastChild
 
     let synth = window.speechSynthesis
 
     // English word
-    let wordEng = new SpeechSynthesisUtterance(engWord)
-    wordEng.voice = voices[4]
-    synth.speak(wordEng)
-    wordEng.addEventListener('start', e => {
-      word.classList.add('u-scaleUp')
-    })
+    if (children.length > 2) {
+      hearEnglish(children, synth, containerWord, voices)
+    } else {
+      const engWord = containerWord.firstChild
+      let wordEng = new SpeechSynthesisUtterance(engWord.textContent)
+      wordEng.voice = voices[4]
+      synth.speak(wordEng)
+      wordEng.addEventListener('start', e => {
+        containerWord.classList.add('u-scaleUp')
+      })
+    }
 
     // Spanish word
-    let wordEs = new SpeechSynthesisUtterance(esWord)
+    let wordEs = new SpeechSynthesisUtterance(esWord.textContent)
     wordEs.lang = 'es-ES'
     wordEs.voice = voices[8]
     synth.speak(wordEs)
     wordEs.addEventListener('end', e => {
-      word.classList.remove('u-scaleUp')
+      containerWord.classList.remove('u-scaleUp')
     })
   })
 }

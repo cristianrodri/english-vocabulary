@@ -5,27 +5,24 @@ block config
 //- Don't forget to put open graph, twitter and schemas
 
 doctype html
-html(lang="es")
+html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(name="description", content=description)
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title #{pageTitle} - #{siteTitle}
-    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Lato:400,400i,700")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:400,700")
   body
     //- Header (all pages)
-    header.main-header
-      .container-logo
-        a(href="/").container-logo__link
-          picture
-            source(srcset="/assets/icon.webp", type="image/webp")
-            source(srcset="/assets/icon.png", type="image/png")
-            img(srcset="/assets/icon.png", alt="Logo").container-logo__img
-      nav.main-nav
-        ul.main-menu
-          li.main-menu__item: a(href="/").main-menu__link Home
-          li.main-menu__item: a(href="/about-us.html").main-menu__link About us
+    // (style=`background-image: linear-gradient(to right, var(--secondary-color), var(--third-color)), url('/assets/london.jpg')`)
+    header.main-header(style=`background-image: linear-gradient(to right, var(--secondary-color-alpha), var(--third-color-alpha)), url('/assets/${!title ? pageTitle.toLowerCase().split(' ').join('-') : 'london'}.jpg')`)
+      a(href="/").main-header__logo ENG#[span VOC]
+      h1.main-header__title= title ? title : pageTitle
+      //- nav.main-nav
+        //- ul.main-menu
+          //- li.main-menu__item: a(href="/").main-menu__link Home
+          //- li.main-menu__item: a(href="/about-us.html").main-menu__link About us
 
     block title
       if title

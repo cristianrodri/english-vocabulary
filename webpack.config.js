@@ -9,6 +9,7 @@ const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin')
 const fs = require('fs')
 const HtmlWebpackPugPlugin = require('html-webpack-pug-plugin')
 
+// Compile all pug files
 let folder = 'src/pug/pages/'
 let folderLength = folder.length
 let templates = []
