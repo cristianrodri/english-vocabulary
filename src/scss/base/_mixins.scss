@@ -5,3 +5,29 @@
 @mixin to($breakpoint) {
   @media screen and (max-width: #{$breakpoint}px) {@content;}
 }
+
+@mixin animTop {
+  animation: anim 2s ease-in-out;
+
+  @keyframes anim {
+    from {
+      transform: translateY(-250%);
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
+}
+
+@mixin opacity {
+  animation: op .5s ease-in-out;
+
+  @keyframes op {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

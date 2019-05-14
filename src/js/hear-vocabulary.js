@@ -12,8 +12,7 @@ const getVoice = () => {
   })
 }
 
-const hearEnglish = (children, synth, containerWord, voices) => {
-  // console.log(children)
+const hearEnglish = (children, synth, voices) => {
 
   children.some((child, i, arr) => {
 
@@ -22,11 +21,6 @@ const hearEnglish = (children, synth, containerWord, voices) => {
       let wordEng = new SpeechSynthesisUtterance(child.textContent)
       wordEng.voice = voices[4]
       synth.speak(wordEng)
-      wordEng.addEventListener('start', e => {
-        containerWord.classList.add('u-scaleUp')
-      })
-      if (i === 0) {
-      }
     } else {
       return true
     }
@@ -35,9 +29,8 @@ const hearEnglish = (children, synth, containerWord, voices) => {
 
 const speaks = voices => {
   const allWords = Array.from(document.querySelectorAll('.container-table__word'))
-  // console.log(allWords[0].children)
 
-  allWords.map(containerWord => {
+  allWords.forEach(containerWord => {
     const children = Array.from(containerWord.children)
     const esWord = containerWord.lastChild
 
@@ -45,15 +38,12 @@ const speaks = voices => {
 
     // English word
     if (children.length > 2) {
-      hearEnglish(children, synth, containerWord, voices)
+      hearEnglish(children, synth, voices)
     } else {
       const engWord = containerWord.firstChild
       let wordEng = new SpeechSynthesisUtterance(engWord.textContent)
       wordEng.voice = voices[4]
       synth.speak(wordEng)
-      wordEng.addEventListener('start', e => {
-        containerWord.classList.add('u-scaleUp')
-      })
     }
 
     // Spanish word
@@ -61,9 +51,6 @@ const speaks = voices => {
     wordEs.lang = 'es-ES'
     wordEs.voice = voices[8]
     synth.speak(wordEs)
-    wordEs.addEventListener('end', e => {
-      containerWord.classList.remove('u-scaleUp')
-    })
   })
 }
 
@@ -79,16 +66,18 @@ const printVoicesList = e => {
 
 const hearVocabulary = () => {
   const containerTable = document.querySelector('.table-cont')
+  const header = document.querySelector('.main-header')
 
   // Speech synthesis supported by the browser and it's a vocabulary page
   if ('speechSynthesis' in window && containerTable) {
     const button = document.createElement('button')
     button.id = 'hear-vocabulary'
     button.classList.add('u-button')
-    button.textContent = 'Hear Vocabulary'
+    button.setAttribute('title', 'Hear All')
+    // button.textContent = 'Hear Vocabulary'
 
     // Table container
-    containerTable.insertAdjacentElement('beforebegin', button)
+    header.insertAdjacentElement('beforeend', button)
 
     button.addEventListener('click', printVoicesList)
   }

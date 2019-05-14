@@ -4,3 +4,4 @@ public/
 types.md
 workflow.md
 .gitignore
+package-lock.json

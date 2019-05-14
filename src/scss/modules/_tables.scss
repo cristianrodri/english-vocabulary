@@ -11,6 +11,7 @@
   --bg-color: hsla(241, 100%, 50%, .7);
 
   margin: 0 auto;
+  margin-top: 2rem;
   width: 50%;
   min-width: 600px;
   table-layout: fixed;
@@ -20,7 +21,7 @@
 
   &__type {
     width: 90px;
-    background-color: var(--bg-color);
+    background-color: var(--third-color);
     cursor: pointer;
   }
 
@@ -34,9 +35,9 @@
     transition: all .5s;
 
     &:hover {
-      transform: scale(1.5);
+      // transform: scale(1.5);
       --bg-color: hsla(120, 11%, 4%, 1);
-      z-index: 100;
+      // z-index: 100;
     }
   }
 

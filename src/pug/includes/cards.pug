@@ -5,5 +5,4 @@ mixin type(word)
         source(srcset=`assets/${word.toLowerCase().split(' ').join('-')}.webp` type="image/webp")
         source(srcset=`assets/${word.toLowerCase().split(' ').join('-')}.jpg` type="image/jpeg")
         img(srcset=`assets/${word.toLowerCase().split(' ').join('-')}.jpg`, alt=word)
-    .main-card__content
-      h2.main-card__name= word
+    h2.main-card__name= word

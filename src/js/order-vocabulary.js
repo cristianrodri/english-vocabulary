@@ -29,12 +29,12 @@ const start = child => {
 const orderVocabulary = () => {
   if (englishWord && spanishWord) {
     const count = englishWord.parentElement.childElementCount - 1
-    
+
     // Si se hace click en English
     englishWord.addEventListener('click', () => {
       start(0)
     })
-    
+
     // Si se hace click en Spanish
     spanishWord.addEventListener('click', () => {
       start(count)

@@ -6,7 +6,10 @@
   --secondary-color-alpha: rgba(103, 60, 201, .8);
   --third-color: #E4336F;
   --third-color-alpha: rgba(228, 51, 111, .8);
-  --color-title: yellow;
+  --fourth-color: #3FC83F;
+  --fourth-color-alpha: rgba(63, 200, 63, .8);
+  --blue-color: #1492F5;
+  --blue-color-alpha: rgba(20, 146, 245, .8);
   --gutter: 16px;
 
   // Font sizes
@@ -21,6 +24,13 @@
 $primary-color: #282D31;
 $secondary-color: #673CC9;
 $third-color: #E4336F;
+$primary-color-alpha: rgba(40, 45, 49, .8);
+$secondary-color-alpha: rgba(103, 60, 201, .8);
+$third-color-alpha: rgba(228, 51, 111, .8);
+$fourth-color: #3FC83F;
+$fourth-color-alpha: rgba(63, 200, 63, .8);
+$blue-color: #1492F5;
+$blue-color-alpha: rgba(20, 146, 245, .8);
 
 // Layout
 $gutter: 16px;
