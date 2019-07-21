@@ -41,12 +41,12 @@ const traverseDir = dir => {
 traverseDir(folder)
 
 const devMode = process.env.NODE_ENV !== 'production'
+const outPutSass = devMode ? 'expanded' : 'compressed'
 
 module.exports = {
   entry: {
     js: './src/js/index.js'
   },
-  mode: 'none',
   output: {
     filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
@@ -93,14 +93,14 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               autoprefixer: {
-                browser: ['last 2 versions']
+                browser: ['last 2 versions'],
               },
               sourceMap: true,
               plugins: () => [autoprefixer]
             }
           },
           'resolve-url-loader',
-          'sass-loader?outputStyle=compressed&sourceMap'
+          `sass-loader?outputStyle=${outPutSass}&sourceMap`
         ]
       },
       {

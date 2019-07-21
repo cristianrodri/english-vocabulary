@@ -29,8 +29,9 @@ const hearEnglish = (children, synth, voices) => {
 
 const speaks = voices => {
   const allWords = Array.from(document.querySelectorAll('.container-table__word'))
+  const title = document.querySelector('.main-header__title')
 
-  allWords.forEach(containerWord => {
+  for (const containerWord of allWords) {
     const children = Array.from(containerWord.children)
     const esWord = containerWord.lastChild
 
@@ -38,33 +39,35 @@ const speaks = voices => {
 
     // English word
     if (children.length > 2) {
-      hearEnglish(children, synth, voices)
+      // hearEnglish(children, synth, voices)
     } else {
-      const engWord = containerWord.firstChild
-      let wordEng = new SpeechSynthesisUtterance(engWord.textContent)
-      wordEng.voice = voices[4]
-      synth.speak(wordEng)
     }
+    const engWord = containerWord.firstChild
+    let wordEng = new SpeechSynthesisUtterance(engWord.textContent)
+    wordEng.voice = voices[4]
+    synth.speak(wordEng)
+
+    wordEng.addEventListener('start', e => {
+      title.textContent = `${engWord.textContent} - ${esWord.textContent}`
+    })
 
     // Spanish word
     let wordEs = new SpeechSynthesisUtterance(esWord.textContent)
     wordEs.lang = 'es-ES'
     wordEs.voice = voices[8]
     synth.speak(wordEs)
-  })
+  }
 }
 
-const printVoicesList = e => {
+const printVoicesList = async e => {
   e.preventDefault()
-  let getAllVoices = getVoice()
+  let getAllVoices = await getVoice()
 
-  getAllVoices.then(resolve => {
-    console.log(resolve)
-    speaks(resolve)
-  })
+  console.log(getAllVoices)
+  speaks(getAllVoices)
 }
 
-const hearVocabulary = () => {
+export const hearVocabulary = () => {
   const containerTable = document.querySelector('.table-cont')
   const header = document.querySelector('.main-header')
 
@@ -82,5 +85,3 @@ const hearVocabulary = () => {
     button.addEventListener('click', printVoicesList)
   }
 }
-
-export default hearVocabulary
