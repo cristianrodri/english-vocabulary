@@ -27,7 +27,7 @@ const traverseDir = dir => {
       let extractFile = fullPath.substring(extractPath, extractPugExt)
         templates.push(
           new HtmlWebpackPlugin({
-            favicon: './src/img/icon.png',
+            favicon: './src/img/logo.png',
             template: fullPath,
             filename: extractFile + '.html',
             inject: true
