@@ -1,0 +1,12 @@
+extends /includes/template.pug
+
+append config
+  -pageTitle = 'About'
+  -title = 'About this site'
+
+block main
+  p.note Este es un sitio en dónde puedes repasar vocabulario ordenado por categorías, ya sea verbos regulares, irregulares, comidas, colores, deportes, profesiones, etc.
+
+  p.note Gran parte de este vocabulario es gracias a 123-ingles y sus cursos. Puedes visitar su sitio #[a(href="https://123-ingles.com/", target="_blank") Aquí]
+
+  p.note No sólo puedes leer el vocabulario, también puedes escucharlo gracias a una #[em web API]. Sólo haz click en el ícono de la parte inferior del título.

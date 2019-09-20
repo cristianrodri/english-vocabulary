@@ -4,19 +4,30 @@ mixin word(esWord, ...engWord)
     while count < engWord.length
       td.eng-word #{engWord[count]}
       -count++
-    td.es-word #{esWord}
 
-//- button.u-button#hear-vocabulary Hear Vocabulary
+    // Adding past and participle to regular verbs that weren't added to third parameter
+    if pageTitle === 'Regular Verbs' && engWord.length === 1
+      -let presentWord = engWord[0]
+      -let lastLetter = presentWord.charAt(presentWord.length - 1)
+
+      td.eng-word= `${engWord[0]}${lastLetter === 'e' ? 'd' : 'ed'}`
+    td.es-word #{esWord}
 
 .table-cont
   table.container-table#container-table
     thead
       if pageTitle == 'Irregular Verbs' || pageTitle == 'Common Verbs'
         tr.container-table__type
-          th.container-table__title-eng#english-word English
+          th.container-table__title-eng#english-word(title="Order by A-Z") English
           th.container-table__title-eng Past
           th.container-table__title-eng Participle
-          th.container-table__title-es#spanish-word Spanish
+          th.container-table__title-es#spanish-word(title="Order by A-Z") Spanish
+
+      else if pageTitle == 'Regular Verbs'
+        tr.container-table__type
+          th.container-table__title-eng#english-word(title="Order by A-Z") English
+          th.container-table__title-eng Past and Participle
+          th.container-table__title-es#spanish-word(title="Order by A-Z") Spanish
 
       else if pageTitle == 'Alphabet'
         tr.container-table__type
@@ -25,13 +36,13 @@ mixin word(esWord, ...engWord)
 
       else if pageTitle == 'Numbers'
         tr.container-table__type
-          th.container-table__title-es#spanish-word Number
-          th.container-table__title-eng#english-word English
+          th.container-table__title-es Number
+          th.container-table__title-eng English
 
       else
         tr.container-table__type
-          th.container-table__title-eng#english-word English
-          th.container-table__title-es#spanish-word Spanish
+          th.container-table__title-eng#english-word(title="Order by A-Z") English
+          th.container-table__title-es#spanish-word(title="Order by A-Z") Spanish
 
     tbody
       block table

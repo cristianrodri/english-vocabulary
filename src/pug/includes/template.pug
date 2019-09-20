@@ -2,8 +2,6 @@ block config
   include /includes/config.pug
   include /includes/cards.pug
 
-//- Don't forget to put open graph, twitter and schemas
-
 doctype html
 html(lang="en")
   head
@@ -16,16 +14,21 @@ html(lang="en")
   body
     //- Header (all pages)
     header.main-header(style=`background-image: linear-gradient(to right, var(--secondary-color-alpha), var(--third-color-alpha)), url('/assets/${!title ? pageTitle.toLowerCase().replace(/,/g, '').split(' ').join('-') : 'london'}.jpg')`)
-      a(href="/").main-header__logo ENG#[span VOC]
-      h1.main-header__title= title ? title : pageTitle
+      nav.main-header__navigation
+        ul.main-header__menu
+          li: a(href="/").main-header__logo(title="Home") ENG#[span VOC]
+          li: a(href="/about.html").about About
+          li: a(href="/contact.html").contact Contact
+      .main-header__description
+        h1.main-header__title= title ? title : pageTitle
 
-      if title
-        div.main-header__welcome
-          p En esta página podrás encontrar todo el vocabulario en inglés que podrías necesitar ordenado por categorías
+        if descriptionIndex
+          //- div.main-header__welcome
+          p.main-header__welcome En esta página podrás encontrar todo el vocabulario en inglés que podrías necesitar ordenado por categorías
 
     //- Main content
     //- If it has title, it means homepage. Else it's' vocabulary pages
-    if title
+    if descriptionIndex
       main(role="main").main-content
         block main
     else

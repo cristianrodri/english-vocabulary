@@ -20,7 +20,6 @@ const start = child => {
   })
 
   allWords.forEach(word => {
-    // word.parentElement.appendChild(word)
     fragment.appendChild(word)
   })
   parent.appendChild(fragment)

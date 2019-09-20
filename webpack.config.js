@@ -1,5 +1,4 @@
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -51,11 +50,6 @@ module.exports = {
     filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
   },
-  // devServer: {
-  //   hot: true,
-  //   contentBase: path.join(__dirname, './src/pug'),
-  //   watchContentBase: true
-  // },
   devtool: 'source-map',
   module: {
     rules: [
@@ -122,22 +116,8 @@ module.exports = {
     new HtmlWebpackPugPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
-      // filename: 'output.css',
       chunkFilename: '[id].[hash].css'
     }),
-    // new HtmlWebpackPlugin({
-    //   favicon: './src/img/icon.png',
-    //   template: './src/pug/index.pug',
-    //   filename: 'index.html',
-    //   inject: true,
-    //   chunks: ['js'],
-    //   minify: {
-    //     html5: true,
-    //     collapseWhitespace: true,
-    //     caseSensitive: true,
-    //     removeComments: true
-    //   }
-    // }),
     new CopyWebpackPlugin([
       {from:'./src/img',to:'assets'}
     ]),

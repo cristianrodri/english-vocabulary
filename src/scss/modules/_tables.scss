@@ -3,6 +3,25 @@
   margin-left: var(--gutter);
 }
 
+.note {
+  font-size: var(--h2);
+  // text-align: center;
+  margin-top: 1rem;
+  color: #fff;
+
+  span {
+    font-weight: bold;
+  }
+
+  a {
+    color: var(--third-color);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .table-cont {
   overflow: auto;
 }
