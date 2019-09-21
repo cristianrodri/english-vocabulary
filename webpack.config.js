@@ -98,10 +98,20 @@ module.exports = {
         ]
       },
       {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.(jpe?g|png|gif|svg|webp)$/i,
         use: [
-          'file-loader?name=assets/[name].[ext]',
-          'image-webpack-loader?bypassOnDebug'
+          'file-loader?name=assets/[name].[ext]'
         ]
       },
       {
