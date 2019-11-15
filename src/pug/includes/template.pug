@@ -16,7 +16,8 @@ html(lang="en")
     header.main-header(style=`background-image: linear-gradient(to right, var(--secondary-color-alpha), var(--third-color-alpha)), url('/assets/${!title ? pageTitle.toLowerCase().replace(/,/g, '').split(' ').join('-') : 'london'}.jpg')`)
       nav.main-header__navigation
         ul.main-header__menu
-          li: a(href="/").main-header__logo(title="Home") ENG#[span VOC]
+          li
+            a(href="/").main-header__logo(title="Home") ENG#[span VOC]
           li: a(href="/about.html").about About
           li: a(href="/contact.html").contact Contact
       .main-header__description

@@ -26,11 +26,42 @@
   overflow: auto;
 }
 
+.practice-title {
+  text-align: center;
+  margin-top: .8rem;
+  color: #fff;
+}
+
+.practice-translate {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: center;
+  grid-gap: 1rem;
+  margin-top: .7rem;
+
+  button {
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    background-color: transparent;
+    font-size: var(--base);
+    color: #fff;
+    outline: none;
+    border: none;
+    // border-color: var(--secondary-color);
+    letter-spacing: 1px;
+    transition: all .3s;
+
+    &:hover {
+      background-color: darken($secondary-color, 0);
+    }
+  }
+}
+
 .container-table {
   --bg-color: hsla(241, 100%, 50%, .7);
 
   margin: 0 auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 50%;
   min-width: 600px;
   table-layout: fixed;
@@ -72,4 +103,48 @@
 .es-word {
   padding: 0.5em;
   transition: all .5s;
+}
+
+[class$="-word"] {
+  position: relative;
+
+}
+
+.word-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-size: var(--little-big);
+  text-align: center;
+  outline: none;
+  border: none;
+  display: none;
+}
+
+.word-answer {
+  position: absolute;
+  top: 0;
+  right: .5rem;
+  height: 100%;
+  z-index: 2000;
+  display: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.container-focused {
+  background-color: var(--secondary-color);
+}
+
+.show-input {
+  display: block;
+}
+
+.add-focus-error:focus {
+  background-color: red;
 }

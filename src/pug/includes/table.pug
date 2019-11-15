@@ -3,6 +3,8 @@ mixin word(esWord, ...engWord)
   tr.container-table__word
     while count < engWord.length
       td.eng-word #{engWord[count]}
+        input(type="text").word-input
+        button(title="Show answer").word-answer 👁️
       -count++
 
     // Adding past and participle to regular verbs that weren't added to third parameter
@@ -11,9 +13,18 @@ mixin word(esWord, ...engWord)
       -let lastLetter = presentWord.charAt(presentWord.length - 1)
 
       td.eng-word= `${engWord[0]}${lastLetter === 'e' ? 'd' : 'ed'}`
+        input(type="text").word-input
+        button(title="Show answer").word-answer 👁️
     td.es-word #{esWord}
+      input(type="text").word-input
+      button(title="Show answer").word-answer 👁️
 
 .table-cont
+  h2.practice-title Practice Translate
+  div.practice-translate
+    button.practice-english Practice English
+    button.practice-spanish Practice Spanish
+
   table.container-table#container-table
     thead
       if pageTitle == 'Irregular Verbs' || pageTitle == 'Common Verbs'
