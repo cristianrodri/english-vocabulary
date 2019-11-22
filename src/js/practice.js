@@ -1,9 +1,3 @@
-// Task
-  // hear voice when a word is clicked
-  // add an input in the of the page and put any word and when the input is entered hear voice
-  // change focus error style
-  // fix double words or double translate, making it with coma
-
 const changeUI = (lang, opposite) => {
   const words = document.querySelectorAll(`.${lang}-word`)
   const wordsOpposite = document.querySelectorAll(`.${opposite}-word`)
@@ -37,7 +31,7 @@ const checkVocabulary = lang => {
 
   const allShownInputs = document.querySelectorAll('.show-input')
 
-  // add and remove background when input is focused and blurred
+  // add and remove background when input is focused and blurred respectively
   allShownInputs.forEach(input => {
     input.addEventListener('focus', e => {
       e.target.parentElement.parentElement.classList.add('container-focused')

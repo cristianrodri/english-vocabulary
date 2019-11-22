@@ -15,37 +15,38 @@ mixin word(esWord, ...engWord)
       td.eng-word= `${engWord[0]}${lastLetter === 'e' ? 'd' : 'ed'}`
         input(type="text").word-input
         button(title="Show answer").word-answer 👁️
-    td.es-word #{esWord}
+    td(class=`${pageTitle === 'Alphabet' || pageTitle === 'Numbers' ? '' : 'es-word'}`) #{esWord}
       input(type="text").word-input
       button(title="Show answer").word-answer 👁️
 
 .table-cont
-  h2.practice-title Practice Translate
-  div.practice-translate
-    button.practice-english Practice English
-    button.practice-spanish Practice Spanish
+  unless pageTitle === 'Alphabet'
+    h2.practice-title Practice Translate
+    div.practice-translate
+      button.practice-english Practice English
+      button.practice-spanish Practice Spanish
 
   table.container-table#container-table
     thead
-      if pageTitle == 'Irregular Verbs' || pageTitle == 'Common Verbs'
+      if pageTitle === 'Irregular Verbs' || pageTitle === 'Common Verbs'
         tr.container-table__type
           th.container-table__title-eng#english-word(title="Order by A-Z") English
           th.container-table__title-eng Past
           th.container-table__title-eng Participle
           th.container-table__title-es#spanish-word(title="Order by A-Z") Spanish
 
-      else if pageTitle == 'Regular Verbs'
+      else if pageTitle === 'Regular Verbs'
         tr.container-table__type
           th.container-table__title-eng#english-word(title="Order by A-Z") English
           th.container-table__title-eng Past and Participle
           th.container-table__title-es#spanish-word(title="Order by A-Z") Spanish
 
-      else if pageTitle == 'Alphabet'
+      else if pageTitle === 'Alphabet'
         tr.container-table__type
-          th.container-table__title-eng#english-word English
-          th.container-table__title-es#spanish-word Pronunciation
+          th.container-table__title-eng English
+          th.container-table__title-es Pronunciation
 
-      else if pageTitle == 'Numbers'
+      else if pageTitle === 'Numbers'
         tr.container-table__type
           th.container-table__title-es Number
           th.container-table__title-eng English

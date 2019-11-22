@@ -72,7 +72,6 @@
   &__type {
     width: 90px;
     background-color: var(--third-color);
-    cursor: pointer;
   }
 
   &__word {
@@ -103,11 +102,11 @@
 .es-word {
   padding: 0.5em;
   transition: all .5s;
+  cursor: pointer;
 }
 
 [class$="-word"] {
   position: relative;
-
 }
 
 .word-input {
@@ -146,5 +145,5 @@
 }
 
 .add-focus-error:focus {
-  background-color: red;
+  background-color: var(--wrong);
 }

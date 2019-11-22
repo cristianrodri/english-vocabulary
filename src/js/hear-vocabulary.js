@@ -19,7 +19,6 @@ const speaks = voices => {
   for (const containerWord of allWords) {
     const children = Array.from(containerWord.children)
     const esWord = containerWord.lastChild
-    const isNumbersPage = title.textContent === 'Numbers'
 
     let synth = window.speechSynthesis
 
@@ -31,13 +30,13 @@ const speaks = voices => {
         // break this loop when index is the last iteration because the content is spanish word
         if (index === children.length - 1) break
 
-        let wordEng = new SpeechSynthesisUtterance(child.textContent)
+        let wordEng = new SpeechSynthesisUtterance(child.childNodes[0].textContent)
         wordEng.voice = voices[4]
         synth.speak(wordEng)
 
         if (index === 0) {
           wordEng.addEventListener('start', e => {
-            title.textContent = `${children[0].textContent} - ${children[1].textContent}${children.length === 4 ? ' - ' + children[2].textContent : ''} - ${esWord.textContent}`
+            title.textContent = `${children[0].childNodes[0].textContent} - ${children[1].childNodes[0].textContent}${children.length === 4 ? ' - ' + children[2].textContent : ''} - ${esWord.childNodes[0].textContent}`
 
             containerWord.classList.add('u-active-table')
           })
@@ -47,19 +46,20 @@ const speaks = voices => {
     } else {
       // engWord listen the right side of the table whether is the numbers page
       const engWord = containerWord.firstChild
+      const isNumbersPage = title.textContent === 'Numbers'
 
       // when the numbers page is shown, listen the right side of the table (var called esWord)
-      let wordEng = new SpeechSynthesisUtterance(isNumbersPage ? esWord.textContent : engWord.textContent)
+      let wordEng = new SpeechSynthesisUtterance(isNumbersPage ? esWord.childNodes[0].textContent : engWord.childNodes[0].textContent)
       wordEng.voice = voices[4]
       synth.speak(wordEng)
 
       wordEng.addEventListener('start', e => {
-        title.textContent = `${engWord.textContent} - ${esWord.textContent}`
+        title.textContent = `${engWord.childNodes[0].textContent} - ${esWord.childNodes[0].textContent}`
         containerWord.classList.add('u-active-table')
       })
 
-      // It's not necessary to listen spanish translation with numbers
-      if (isNumbersPage) {
+      // It's not necessary to listen spanish translation with numbers and alphabet
+      if (isNumbersPage || title.textContent === 'Alphabet') {
         wordEng.addEventListener('end', e => {
           containerWord.classList.remove('u-active-table')
         })
@@ -68,7 +68,7 @@ const speaks = voices => {
     }
 
     // Spanish word
-    let wordEs = new SpeechSynthesisUtterance(esWord.textContent)
+    let wordEs = new SpeechSynthesisUtterance(esWord.childNodes[0].textContent)
     wordEs.lang = 'es-ES'
     wordEs.voice = voices[8]
     synth.speak(wordEs)
@@ -82,12 +82,39 @@ const speaks = voices => {
 const printVoicesList = async e => {
   e.preventDefault()
 
-  // Remove listen button after to be clicked
+  // Remove listen icon after to be clicked
   e.target.parentElement.removeChild(e.target)
 
-  let getAllVoices = await getAPIVoices()
+  const getAllVoices = await getAPIVoices()
 
   speaks(getAllVoices)
+}
+
+const hearWord = async e => {
+  e.preventDefault()
+
+  // target is not eng-word or es-word classes
+  if (!e.target.className.includes('-word')) return
+
+  const voices = await getAPIVoices()
+  const synth = window.speechSynthesis
+  const title = document.querySelector('.main-header__title')
+  const isNumberPage = title.textContent === 'Numbers'
+
+  const word = new SpeechSynthesisUtterance(
+    // if it's a numbers page, hear the sibling text
+    isNumberPage
+      ? e.target.nextElementSibling.childNodes[0].textContent
+      : e.target.childNodes[0].textContent
+  )
+
+  let index = 0
+
+  if (e.target.className === 'eng-word') index = 1
+  if (e.target.className === 'es-word') word.lang = 'es-ES'
+
+    word.voice = voices[index]
+    synth.speak(word)
 }
 
 export const hearVocabulary = () => {
@@ -105,5 +132,7 @@ export const hearVocabulary = () => {
     header.insertAdjacentElement('beforeend', button)
 
     button.addEventListener('click', printVoicesList)
+
+    containerTable.addEventListener('click', hearWord)
   }
 }
