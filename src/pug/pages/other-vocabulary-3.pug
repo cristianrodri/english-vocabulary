@@ -1,0 +1,22 @@
+extends /includes/template.pug
+
+append config
+  -pageTitle = 'Other Vocabulary 3'
+
+block main
+  p.note #[span Nota:] En esta página se va a colocar vocabulario random que he coleccionado por mi cuenta y que posiblemente no este en los otros vocabularios. Seguramente muchas de estas palabras podrían estar en los otros tipos de vocabularios específicos, sin embargo, por el momento se dejarán aquí porque se van colocando más palabras a medida que pase el tiempo.
+
+  include /includes/table.pug
+    +word('Aplanar', 'Flatten')
+    +word('Acusado', 'Convicted')
+    +word('Inmune', 'Immume')
+    +word('Escombros, ruinas', 'Debris')
+    +word('De otra manera', 'Otherwise')
+    +word('Acertijos', 'Riddles')
+    +word('Hipo', 'Hiccups')
+    +word('Permitirse', 'Afford')
+    +word('Extensamente', 'Widely')
+    +word('Cambio, desplazarse', 'Shift')
+    +word('Audaz', 'Fearless')
+    +word('Saludo', 'Salute')
+    +word('Sútil', 'Subtle')

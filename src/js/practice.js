@@ -1,3 +1,5 @@
+import { getAPIVoices } from './hear-vocabulary'
+
 const changeUI = (lang, opposite) => {
   const words = document.querySelectorAll(`.${lang}-word`)
   const wordsOpposite = document.querySelectorAll(`.${opposite}-word`)
@@ -55,13 +57,14 @@ const checkVocabulary = lang => {
     }
   })
 
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', async e => {
 
     // enter the input and check is value is equal to the word in the table
     if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
 
       const word = e.target.parentElement.childNodes[0].textContent.toLowerCase()
       const value = e.target.value
+      const isEnglishWord = e.target.parentElement.className.includes('eng-word')
 
       // input value is correct
       if (word === value) {
@@ -94,6 +97,20 @@ const checkVocabulary = lang => {
         } else {
           // otherwise is the last shown input of the page and after will focus the first shown input
           if (firstInputOfThePage) firstInputOfThePage.focus()
+        }
+
+        // empty input
+        e.target.value = ''
+        e.target.classList.remove('add-focus-error')
+
+        // hear voice
+        if ('speechSynthesis' in window && isEnglishWord) {
+          const voices = await getAPIVoices()
+          const synth = window.speechSynthesis
+          const word = new SpeechSynthesisUtterance(value)
+
+          word.voice = voices[1]
+          synth.speak(word)
         }
 
       } else {

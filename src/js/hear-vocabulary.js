@@ -1,4 +1,4 @@
-const getAPIVoices = () => {
+export const getAPIVoices = () => {
   return new Promise(resolve => {
     let voices = speechSynthesis.getVoices()
     if (voices.length) {
