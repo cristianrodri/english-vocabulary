@@ -44,3 +44,12 @@
 .u-active-table {
   background-color: var(--secondary-color);
 }
+
+.u-current-study-page {
+  background-image: radial-gradient(circle, rgba(41, 32, 32, 0.8), rgba(102, 10, 41, 0.8));
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
+}
