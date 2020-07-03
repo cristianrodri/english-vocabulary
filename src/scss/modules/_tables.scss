@@ -4,9 +4,9 @@
 }
 
 .note {
-  font-size: var(--h2);
-  // text-align: center;
-  margin-top: 1rem;
+  font-size: var(--litte-big);
+  margin: 1rem;
+  margin-top: 2rem;
   color: #fff;
 
   span {
@@ -22,10 +22,6 @@
   }
 }
 
-.table-cont {
-  overflow: auto;
-}
-
 .practice-title {
   text-align: center;
   margin-top: .8rem;
@@ -39,20 +35,27 @@
   grid-gap: 1rem;
   margin-top: .7rem;
 
+  @include from(640) {
+    grid-gap: 2rem;
+  }
+
   button {
-    padding: 0.4rem 1rem;
+    // padding: 0.4rem 1rem;
+    padding-bottom: 0.1rem;
     cursor: pointer;
     background-color: transparent;
     font-size: var(--base);
     color: #fff;
     outline: none;
     border: none;
+    border-bottom: 1px solid currentColor;
     // border-color: var(--secondary-color);
     letter-spacing: 1px;
     transition: all .3s;
 
     &:hover {
-      background-color: darken($secondary-color, 0);
+      color: var(--secondary-color);
+      // background-color: darken($secondary-color, 0);
     }
   }
 }
@@ -62,31 +65,39 @@
 
   margin: 0 auto;
   margin-top: 1rem;
-  width: 50%;
-  min-width: 600px;
+  max-width: 90%;
   table-layout: fixed;
   text-align: center;
   margin-bottom: var(--gutter);
   font-size: var(--little-big);
 
+  @include from(640) {
+    width: 35rem;
+  }
+
+  th, td {
+    width: 50%;
+    word-break: break-word;
+
+    @include to(640) {
+      font-size: 13px;
+    }
+  }
+
   &__type {
-    width: 90px;
     background-color: var(--third-color);
   }
 
   &__word {
     --bg-color: hsla(120, 11%, 4%, 0.7);
 
-    width: 90px;
     color: hsl(0, 0, 100);
     font-size: var(--little-big);
     background-color: var(--bg-color);
     transition: all .5s;
 
     &:hover {
-      // transform: scale(1.5);
       --bg-color: hsla(120, 11%, 4%, 1);
-      // z-index: 100;
     }
   }
 
@@ -121,6 +132,10 @@
   outline: none;
   border: none;
   display: none;
+
+  @include to(640) {
+    font-size: 13px;
+  }
 }
 
 .word-answer {

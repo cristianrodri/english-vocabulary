@@ -50,7 +50,8 @@ const speaks = voices => {
 
       // when the numbers page is shown, listen the right side of the table (var called esWord)
       let wordEng = new SpeechSynthesisUtterance(isNumbersPage ? esWord.childNodes[0].textContent : engWord.childNodes[0].textContent)
-      wordEng.voice = voices[4]
+      wordEng.voice = voices[1]
+      wordEng.default = true
       synth.speak(wordEng)
 
       wordEng.addEventListener('start', e => {
@@ -70,7 +71,7 @@ const speaks = voices => {
     // Spanish word
     let wordEs = new SpeechSynthesisUtterance(esWord.childNodes[0].textContent)
     wordEs.lang = 'es-ES'
-    wordEs.voice = voices[8]
+    wordEs.voice = voices[0]
     synth.speak(wordEs)
 
     wordEs.addEventListener('end', e => {
@@ -86,6 +87,23 @@ const printVoicesList = async e => {
   e.target.parentElement.removeChild(e.target)
 
   const getAllVoices = await getAPIVoices()
+
+  console.log(getAllVoices)
+
+  // TEST
+  // const note = document.querySelector('.note')
+
+  // const printVoice = `
+  //   <div>
+  //     <h3>This device has ${getAllVoices.length} voices</h3>
+  //     <ol>
+  //       ${getAllVoices.map(voice => `<li>${voice.name} - ${voice.default.toString()}</li>`)}
+  //     </ol>
+  //   </div>
+  // `
+
+  // note.insertAdjacentHTML('beforebegin', printVoice)
+  // END TEST
 
   speaks(getAllVoices)
 }
