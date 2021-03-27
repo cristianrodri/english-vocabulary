@@ -1,0 +1,25 @@
+extends /includes/template.pug
+
+append config
+  -pageTitle = 'Dictionary'
+
+block main
+  include /includes/table.pug
+    +word('devolución, reembolso', 'a refund')
+    +word('pagar la cuenta', 'to settle the bill')
+    +word('chispea', 'drizzling')
+    +word('cruce', 'crossroads')
+    +word('enfrente', 'opposite')
+    +word('rotonda', 'roundabout')
+    +word('recto', 'straight on')
+    +word('cruce, bocacalle', 'turning')
+    +word('tique de compra', 'receipt')
+    +word('contestador automático', 'answerphone')
+    +word('beep', 'pitido')
+    +word('espere un momento', 'hold on')
+    +word('llamada a cobro revertido', 'reverse charge call')
+    +word('estar comunicado', 'to be engaged')
+    +word('marcar', 'to dial')
+    +word('colgar', 'to hang up')
+    +word('descolgar el teléfono', 'to pick the phone up')
+    +word('pasar la llamada', 'to put someone through')
