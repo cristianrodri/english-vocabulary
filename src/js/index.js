@@ -17,7 +17,13 @@ import { practice } from './practice'
       return childName.classList.add('u-current-study-page')
     }
   })
+}
 
+{
+  const title = document.querySelector('.practice-title')
+  const allTranslations = document.querySelectorAll('tbody tr').length
+
+  if (title) title.insertAdjacentText('beforeend', ` (${allTranslations})`)
 }
 
 orderVocabulary()
