@@ -24,19 +24,19 @@
 
 .practice-title {
   text-align: center;
-  margin-top: .8rem;
+  margin-top: 0.8rem;
   color: #fff;
 }
 
 .practice-translate {
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
+  // grid-template-columns: auto auto;
   justify-content: center;
-  grid-gap: 1rem;
-  margin-top: .7rem;
+  gap: 1rem;
+  margin-top: 0.7rem;
 
   @include from(640) {
-    grid-gap: 2rem;
+    gap: 2rem;
   }
 
   button {
@@ -51,7 +51,7 @@
     border-bottom: 1px solid currentColor;
     // border-color: var(--secondary-color);
     letter-spacing: 1px;
-    transition: all .3s;
+    transition: all 0.3s;
 
     &:hover {
       color: var(--secondary-color);
@@ -61,7 +61,7 @@
 }
 
 .container-table {
-  --bg-color: hsla(241, 100%, 50%, .7);
+  --bg-color: hsla(241, 100%, 50%, 0.7);
 
   margin: 0 auto;
   margin-top: 1rem;
@@ -75,7 +75,8 @@
     width: 35rem;
   }
 
-  th, td {
+  th,
+  td {
     width: 50%;
     word-break: break-word;
 
@@ -94,7 +95,7 @@
     color: hsl(0, 0, 100);
     font-size: var(--little-big);
     background-color: var(--bg-color);
-    transition: all .5s;
+    transition: all 0.5s;
 
     &:hover {
       --bg-color: hsla(120, 11%, 4%, 1);
@@ -106,17 +107,37 @@
     padding: 0.3em;
     color: color(medium-white);
   }
+}
 
+.analyze {
+  $dimension: 35px;
+  $distance: $dimension + 5px;
+
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: -$distance;
+  display: block;
+  width: $dimension;
+  height: 100%;
+
+  &.learned {
+    background-color: hsl(120, 75%, 51%);
+  }
+
+  &.not-learned {
+    background-color: hsl(0, 75%, 51%);
+  }
 }
 
 .eng-word,
 .es-word {
   padding: 0.5em;
-  transition: all .5s;
+  transition: all 0.5s;
   cursor: pointer;
 }
 
-[class$="-word"] {
+[class$='-word'] {
   position: relative;
 }
 
@@ -141,7 +162,7 @@
 .word-answer {
   position: absolute;
   top: 0;
-  right: .5rem;
+  right: 0.5rem;
   height: 100%;
   z-index: 2000;
   display: none;

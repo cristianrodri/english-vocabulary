@@ -4,10 +4,11 @@ mixin word(esWord, ...engWord)
     while count < engWord.length
       td.eng-word #{engWord[count]}
         input(type="text").word-input
+        .analyze.learned(title="Learned")
         button(title="Show answer").word-answer 👁️
       -count++
 
-    // Adding past and participle to regular verbs that weren't added to third parameter
+    //- Adding past and participle to regular verbs that weren't added to third parameter
     if pageTitle === 'Regular Verbs' && engWord.length === 1
       -let presentWord = engWord[0]
       -let lastLetter = presentWord.charAt(presentWord.length - 1)
@@ -17,6 +18,7 @@ mixin word(esWord, ...engWord)
         button(title="Show answer").word-answer 👁️
     td(class=`${pageTitle === 'Alphabet' || pageTitle === 'Numbers' ? '' : 'es-word'}`) #{esWord}
       input(type="text").word-input
+      //- span.es.learned(title="Learned")
       button(title="Show answer").word-answer 👁️
 
 .table-cont
@@ -25,6 +27,9 @@ mixin word(esWord, ...engWord)
     div.practice-translate
       button.practice-english Practice English
       button.practice-spanish Practice Spanish
+
+    div.practice-translate
+      button#filter-not-learned Filter not learned words
 
   table.container-table#container-table
     thead

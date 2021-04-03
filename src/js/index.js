@@ -3,6 +3,7 @@ import '../scss/styles.scss'
 import orderVocabulary from './order-vocabulary'
 import { hearVocabulary } from './hear-vocabulary'
 import { practice } from './practice'
+import { filterWords, repass } from './repass'
 
 {
   // adding color to the card that I will be studying
@@ -29,3 +30,5 @@ import { practice } from './practice'
 orderVocabulary()
 hearVocabulary()
 practice()
+repass()
+filterWords()
