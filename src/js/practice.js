@@ -79,7 +79,9 @@ if (containerTable) {
       // input value is correct
       if (word === value) {
         e.target.classList.remove('show-input')
-        e.target.nextElementSibling.classList.remove('show-input')
+        e.target.parentElement
+          .querySelector('button')
+          .classList.remove('show-input')
 
         // save in local storage after typing a word meaning that this is the current page I'm studying
         localStorage.removeItem('study-page')
