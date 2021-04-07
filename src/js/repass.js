@@ -71,6 +71,7 @@ export const filterWords = () => {
         if (!isNotLearned) {
           item.parentElement.style.opacity = '0'
           item.parentElement.style.display = 'none'
+          item.classList.remove('show-input')
         }
       })
     })
