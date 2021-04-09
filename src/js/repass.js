@@ -69,9 +69,10 @@ export const filterWords = () => {
           .classList.contains('not-learned')
 
         if (!isNotLearned) {
-          item.parentElement.style.opacity = '0'
-          item.parentElement.style.display = 'none'
-          item.classList.remove('show-input')
+          // item.parentElement.style.opacity = '0'
+          // item.parentElement.style.display = 'none'
+          // item.classList.remove('show-input')
+          item.parentElement.parentElement.removeChild(item.parentElement)
         }
       })
     })
