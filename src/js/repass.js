@@ -34,8 +34,6 @@ export const repass = () => {
       const getSavedNotLearnedWords =
         JSON.parse(localStorage.getItem(pathname)) || []
 
-      console.log(getSavedNotLearnedWords)
-
       const title = isNotLearned ? 'Not learned yet' : 'Learned'
 
       if (isNotLearned) {
@@ -59,11 +57,13 @@ export const repass = () => {
 
 export const filterWords = () => {
   const filterButton = document.getElementById('filter-not-learned')
-  const allWords = document.querySelectorAll('tr td:first-child')
+  // const allWords = document.querySelectorAll('tr td:first-child')
+  // filterButton.textContent = filterButton.textContent +
+  //   ' (' + document.querySelectorAll('tr td:first-child').length + ')'
 
   if (filterButton) {
     filterButton.addEventListener('click', () => {
-      allWords.forEach(item => {
+      document.querySelectorAll('tr td:first-child').forEach(item => {
         const isNotLearned = item
           .querySelector('.analyze')
           .classList.contains('not-learned')
