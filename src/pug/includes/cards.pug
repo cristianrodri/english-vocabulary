@@ -1,9 +1,0 @@
-mixin type(word)
-  article.main-card: a(href=`/${word.toLowerCase().split(' ').join('-')}.html`)
-    //- .main-card__image
-      //- img(src=`assets/${word.toLowerCase().split(' ').join('-')}.webp`, alt=word)
-      //- picture
-        source(srcset=`assets/${word.toLowerCase().split(' ').join('-')}.webp` type="image/webp")
-        source(srcset=`assets/${word.toLowerCase().split(' ').join('-')}.jpg` type="image/jpeg")
-        img(srcset=`assets/${word.toLowerCase().split(' ').join('-')}.jpg`, alt=word)
-    h2.main-card__name= word
