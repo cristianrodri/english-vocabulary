@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+:root {
+  --primary-color: #282d31;
+  --primary-color-alpha: rgba(40, 45, 49, 0.8);
+  --secondary-color: #673cc9;
+  --secondary-color-alpha: rgba(103, 60, 201, 0.8);
+  --third-color: #e4336f;
+  --third-color-alpha: rgba(228, 51, 111, 0.8);
+  --fourth-color: #3fc83f;
+  --fourth-color-alpha: rgba(63, 200, 63, 0.8);
+  --blue-color: #1492f5;
+  --blue-color-alpha: rgba(20, 146, 245, 0.8);
+  --wrong: rgba(204, 20, 20);
+  --gutter: 16px;
+  --h1: 1.4rem;
+  --h2: 1.2rem;
+  --little-big: 1rem;
+  --base: 1rem;
+  --small: 0.8rem;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: var(--primary-color);
+}
+
+a {
+  text-decoration: none;
+}

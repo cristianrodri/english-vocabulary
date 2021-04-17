@@ -1,28 +1,52 @@
 import { GetStaticProps } from 'next'
+import React from 'react'
+import vocabulary from '../assets/vocabulary.json'
+import Layout from '../components/Layout'
+import { customTitle } from '../utils/strings'
+
+type VocabularyTypes = keyof typeof vocabulary.types
+
+interface Props {
+  title: string
+  data: string[]
+}
 
 export async function getStaticPaths() {
+  const paths = Object.keys(vocabulary.types).map((item) => {
+    return {
+      params: { type: item },
+    }
+  })
   return {
-    paths: [
-      { params: { type: 'pikoro' } } // See the "paths" section below
-    ],
-    fallback: false // See the "fallback" section below
+    paths,
+    fallback: false,
   }
 }
 
-interface Props {
-  item: string
+const VocabularyType = ({ title, data }: Props) => {
+  const titleCaptalized = customTitle(title)
+  return (
+    <Layout title={titleCaptalized}>
+      <div>
+        <h1>{titleCaptalized}</h1>
+        <ul>
+          {data.map((p) => (
+            <li key={p}>{p}</li>
+          ))}
+        </ul>
+      </div>
+    </Layout>
+  )
 }
 
-const VocabularyType = ({ item }: Props) => {
-  return <div>hello {item}</div>
-}
-
-export const getStaticProps: GetStaticProps<
-  Props,
-  { type: string; reached: string }
-> = async context => {
-  console.log(context.params)
-  return { props: { item: context.params?.type as string } }
+export const getStaticProps: GetStaticProps<Props, { type: string }> = async (
+  context
+) => {
+  const title = context.params?.type as VocabularyTypes
+  const data = vocabulary.types[context.params?.type as VocabularyTypes].split(
+    ';'
+  )
+  return { props: { title, data } }
 }
 
 export default VocabularyType
