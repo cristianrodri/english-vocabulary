@@ -3,11 +3,12 @@ import React from 'react'
 import vocabulary from '../public/vocabulary.json'
 import Layout from '../components/Layout'
 import { customTitle } from '../utils/strings'
+import { Container } from '../components/table/Container'
 
 type VocabularyTypes = keyof typeof vocabulary.types
 
-interface Props {
-  title: string
+export interface StaticProps {
+  title: VocabularyTypes
   data: string[]
 }
 
@@ -23,25 +24,27 @@ export async function getStaticPaths() {
   }
 }
 
-const VocabularyType = ({ title, data }: Props) => {
+const VocabularyType = ({ title, data }: StaticProps) => {
   const titleCaptalized = customTitle(title)
   return (
     <Layout title={titleCaptalized} banner={title}>
-      <div>
+      {/* <div>
         <h1>{titleCaptalized}</h1>
         <ul>
           {data.map((p) => (
             <li key={p}>{p}</li>
           ))}
         </ul>
-      </div>
+      </div> */}
+      <Container title={title} data={data} />
     </Layout>
   )
 }
 
-export const getStaticProps: GetStaticProps<Props, { type: string }> = async (
-  context
-) => {
+export const getStaticProps: GetStaticProps<
+  StaticProps,
+  { type: string }
+> = async (context) => {
   const title = context.params?.type as VocabularyTypes
   const data = vocabulary.types[context.params?.type as VocabularyTypes].split(
     ';'
