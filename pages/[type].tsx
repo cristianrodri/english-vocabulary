@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import React from 'react'
-import vocabulary from '../assets/vocabulary.json'
+import vocabulary from '../public/vocabulary.json'
 import Layout from '../components/Layout'
 import { customTitle } from '../utils/strings'
 
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
 const VocabularyType = ({ title, data }: Props) => {
   const titleCaptalized = customTitle(title)
   return (
-    <Layout title={titleCaptalized}>
+    <Layout title={titleCaptalized} banner={title}>
       <div>
         <h1>{titleCaptalized}</h1>
         <ul>

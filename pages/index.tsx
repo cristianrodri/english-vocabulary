@@ -1,13 +1,9 @@
-import Link from 'next/link'
 import Layout from '../components/Layout'
+import Image from 'next/image'
 
 const IndexPage = () => (
-  <Layout title="Home">
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
+  <Layout title="home" banner="london">
+    <Image src="/irregular-verbs.jpg" width={300} height={300} />
   </Layout>
 )
 

@@ -20,9 +20,18 @@
   --small: 0.8rem;
 }
 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Quicksand', sans-serif;
   background-color: var(--primary-color);
+  margin: 0;
 }
 
 a {
