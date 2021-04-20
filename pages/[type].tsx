@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 import { customTitle } from '../utils/strings'
 import { Container } from '../components/table/Container'
 
-type VocabularyTypes = keyof typeof vocabulary.types
+export type VocabularyTypes = keyof typeof vocabulary.types
 
 export interface StaticProps {
   title: VocabularyTypes

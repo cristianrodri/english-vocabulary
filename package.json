@@ -10,11 +10,14 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.6",
     "next": "latest",
+    "next-compose-plugins": "^2.2.1",
+    "next-optimized-images": "^2.6.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "styled-components": "^5.2.3"
+    "styled-components": "^5.2.3",
+    "webp-loader": "^0.6.0"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",

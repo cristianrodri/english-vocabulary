@@ -35,7 +35,7 @@ const Layout: FC<{ title: string; banner: string }> = ({
       <title>{title} - English Vocabulary</title>
       <link rel="shortcut icon" href="/logo.png" />
     </Head>
-    <Header banner={`/${banner}.jpg`}>
+    <Header banner={`/${banner}.webp`}>
       <nav>
         <Link href="/">
           <a>
