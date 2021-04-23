@@ -18,13 +18,15 @@ export const getStaticProps: GetStaticProps<Props, {}> = async () => {
 
 const Main = styled.main`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, 300px);
   grid-auto-rows: 200px;
+  padding: 2rem;
+  grid-gap: 1rem;
+  justify-content: center;
 `
 
 const IndexPage = ({ titles }: Props) => (
   <Layout title="home" banner="london">
-    {/* <Image src="/irregular-verbs.jpg" width={300} height={300} /> */}
     <Main>
       {titles.map((title) => (
         <Card key={title} title={title} />

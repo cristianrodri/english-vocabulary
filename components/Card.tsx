@@ -16,8 +16,6 @@ const ImageContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  /* right: 0;
-  bottom: 0; */
 `
 
 const H2 = styled.h2`
@@ -26,6 +24,7 @@ const H2 = styled.h2`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   font-size: 1.8rem;
   color: var(--primary-color-alpha);
   background-image: radial-gradient(
@@ -45,13 +44,7 @@ const Card: FC<{ title: string }> = ({ title }) => {
   return (
     <Article>
       <ImageContainer>
-        <Image
-          src={`/${title}.jpg`}
-          width={300}
-          height={200}
-          // objectFit="cover"
-          layout="responsive"
-        />
+        <Image src={`/${title}.jpg`} width={300} height={200} />
       </ImageContainer>
       <Link href={`/${title}`}>
         <a>
