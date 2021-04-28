@@ -28,14 +28,6 @@ const VocabularyType = ({ title, data }: StaticProps) => {
   const titleCaptalized = customTitle(title)
   return (
     <Layout title={titleCaptalized} banner={title}>
-      {/* <div>
-        <h1>{titleCaptalized}</h1>
-        <ul>
-          {data.map((p) => (
-            <li key={p}>{p}</li>
-          ))}
-        </ul>
-      </div> */}
       <Container title={title} data={data} />
     </Layout>
   )
