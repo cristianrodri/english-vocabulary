@@ -3,6 +3,7 @@ import { Column } from './Column'
 
 interface Props {
   bothWords: string
+  rowIndex: number
 }
 
 const Tr = styled.tr`
@@ -16,12 +17,10 @@ const Tr = styled.tr`
   }
 `
 
-export const Row = ({ bothWords }: Props) => {
-  return (
-    <Tr>
-      {bothWords.split(/, |=/).map((word, i) => (
-        <Column key={word} word={word} columnIndex={i} />
-      ))}
-    </Tr>
-  )
-}
+export const Row = ({ bothWords, rowIndex }: Props) => (
+  <Tr>
+    {bothWords.split(/, |=/).map((word, i) => (
+      <Column key={word + i} word={word} columnIndex={i} rowIndex={rowIndex} />
+    ))}
+  </Tr>
+)

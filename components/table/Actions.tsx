@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { GlobalContext } from '../../pages/[type]'
 
 const Container = styled.div`
   display: flex;
@@ -31,11 +33,16 @@ const Button = styled.button`
 `
 
 export const Actions = () => {
+  const { showInputs } = useContext(GlobalContext)
+
+  const handlePractice = (columnIndex: number) => () => {
+    showInputs(columnIndex)
+  }
   return (
     <Container>
       <Practice>
-        <Button>Practice English</Button>
-        <Button>Practice Spanish</Button>
+        <Button onClick={handlePractice(0)}>Practice English</Button>
+        <Button onClick={handlePractice(1)}>Practice Spanish</Button>
       </Practice>
       <Button>Filter not learned words</Button>
     </Container>

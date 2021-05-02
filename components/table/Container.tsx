@@ -1,5 +1,6 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
-import { StaticProps } from './../../pages/[type]'
+import { GlobalContext, StaticProps } from './../../pages/[type]'
 import { Actions } from './Actions'
 import { Header } from './Header'
 import { Row } from './Row'
@@ -26,17 +27,18 @@ const Table = styled.table`
   font-size: var(--little-big);
 `
 
-export const Container = ({ title, data }: StaticProps) => {
-  console.log(data)
+export const Container = ({ title }: Omit<StaticProps, 'data'>) => {
+  const { words } = useContext(GlobalContext)
+
   return (
     <Main>
-      <Title>Translations ({data.length})</Title>
+      <Title>Translations ({words.length})</Title>
       <Actions />
       <Table>
         <Header title={title} />
         <tbody>
-          {data.map((words) => (
-            <Row key={words} bothWords={words} />
+          {words.map((bothWords, index) => (
+            <Row key={bothWords} bothWords={bothWords} rowIndex={index} />
           ))}
         </tbody>
       </Table>
