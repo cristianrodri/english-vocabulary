@@ -1,6 +1,6 @@
 import { VocabularyTypes } from '../../pages/[type]'
 import vocabulary from '../../public/vocabulary.json'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 interface Props {
   title: VocabularyTypes
@@ -13,34 +13,42 @@ const Row = styled.tr`
   background-color: var(--third-color);
 `
 
-const Column = styled.td`
+const col = css`
   padding: 0.3em;
-  color: #f4f0f0;
   font-weight: 700;
+  color: hsl(0, 15%, 94%);
+`
+
+const Column = styled.td`
+  ${col}
+`
+
+const ColumnHeader = styled.th`
+  ${col}
 `
 
 export const Header = ({ title }: Props) => {
   const firstTheadTitles: PartialTitles = {
-    numbers: 'Number',
+    numbers: 'Number'
   }
 
   const lastTheadTitles: PartialTitles = {
     alphabet: 'Pronuntiation',
-    numbers: 'English',
+    numbers: 'English'
   }
 
-  const past = <th>Past</th>
+  const past = <ColumnHeader>Past</ColumnHeader>
 
   const pastAndParticiple = (
     <>
-      <th>Past</th>
-      <th>Participle</th>
+      <ColumnHeader>Past</ColumnHeader>
+      <ColumnHeader>Participle</ColumnHeader>
     </>
   )
   const checkPastAndParticiple: PartialElement = {
     'regular-verbs': past,
     'irregular-verbs': pastAndParticiple,
-    'common-verbs': pastAndParticiple,
+    'common-verbs': pastAndParticiple
   }
 
   const firstThead = firstTheadTitles?.[title] ?? 'English' // if the title is 'numbers' the first column of th will be 'Number', otherwise will be 'English'
