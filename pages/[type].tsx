@@ -1,4 +1,10 @@
-import { createContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState
+} from 'react'
 import { GetStaticProps } from 'next'
 import vocabulary from '../public/vocabulary.json'
 import Layout from '../components/Layout'
@@ -35,17 +41,21 @@ export const getStaticProps: GetStaticProps<
 }
 
 interface IContext {
-  showColumnInputs: number
+  showColumnInputs: number[]
   words: string[]
-  showInputs: (column: number) => void
+  rowFocus: number
+  showInputs: (column: number[]) => void
+  setRowFocus: Dispatch<SetStateAction<number>>
   // getWords: (column: string[]) => void
   reset: () => void
 }
 
 const contextDefaultValues: IContext = {
-  showColumnInputs: -1,
+  showColumnInputs: [],
   words: [],
+  rowFocus: 0,
   showInputs: () => {},
+  setRowFocus: () => {},
   // getWords: () => {},
   reset: () => {}
 }
@@ -54,10 +64,11 @@ export const GlobalContext = createContext<IContext>(contextDefaultValues)
 
 const VocabularyType = ({ title, data }: StaticProps) => {
   const titleCaptalized = customTitle(title)
-  const [showColumnInputs, setShowColumnInput] = useState<number>(-1)
+  const [showColumnInputs, setShowColumnInput] = useState<number[]>([])
   const [words, setWords] = useState<string[]>(data)
+  const [rowFocus, setRowFocus] = useState(0)
 
-  const showInputs = (columnIndex: number) => {
+  const showInputs = (columnIndex: number[]) => {
     setShowColumnInput(columnIndex)
   }
 
@@ -66,7 +77,7 @@ const VocabularyType = ({ title, data }: StaticProps) => {
   // }
 
   const reset = () => {
-    setShowColumnInput(-1)
+    setShowColumnInput([])
     setWords([])
   }
 
@@ -78,7 +89,14 @@ const VocabularyType = ({ title, data }: StaticProps) => {
 
   return (
     <GlobalContext.Provider
-      value={{ showColumnInputs, words, showInputs, reset }}
+      value={{
+        showColumnInputs,
+        words,
+        rowFocus,
+        showInputs,
+        reset,
+        setRowFocus
+      }}
     >
       <Layout title={titleCaptalized} banner={title}>
         <Container title={title} />

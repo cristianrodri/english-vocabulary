@@ -9,7 +9,7 @@ interface Props {
 }
 
 interface InputProps {
-  showedColumns: number
+  showedColumns: number[]
   correctTyped: boolean
 }
 
@@ -31,23 +31,33 @@ const Input = styled.input<InputProps & Omit<Props, 'word' | 'rowIndex'>>`
   text-align: center;
   font-size: 1rem;
   display: ${(props) =>
-    props.showedColumns === props.columnIndex && !props.correctTyped
+    props.showedColumns.includes(props.columnIndex) && !props.correctTyped
       ? 'block'
       : 'none'};
 `
 
 export const Column = ({ word, columnIndex, rowIndex }: Props) => {
-  const { showColumnInputs, words } = useContext(GlobalContext)
+  const { showColumnInputs, words, rowFocus, setRowFocus } = useContext(
+    GlobalContext
+  )
   const [value, setValue] = useState('')
   const ref = useRef<HTMLInputElement>(null)
   const [correctTyped, setCorrectTyped] = useState(false)
 
   useEffect(() => {
-    if (rowIndex === 0 && showColumnInputs === columnIndex && !correctTyped)
-      ref.current?.focus()
     setCorrectTyped(false)
     setValue('')
+    setRowFocus(0)
   }, [showColumnInputs])
+
+  useEffect(() => {
+    if (
+      rowIndex === rowFocus &&
+      showColumnInputs.includes(columnIndex) &&
+      !correctTyped
+    )
+      ref.current?.focus()
+  }, [rowFocus, showColumnInputs])
 
   const handleTranslation = () => {
     // console.log('row', rowIndex)
@@ -63,6 +73,7 @@ export const Column = ({ word, columnIndex, rowIndex }: Props) => {
       if (value === words[rowIndex].split('=')[columnIndex]) {
         console.log('Correct')
         setCorrectTyped(true)
+        setRowFocus(rowFocus + 1)
       } else {
         console.log('Incorrect')
       }
@@ -81,6 +92,7 @@ export const Column = ({ word, columnIndex, rowIndex }: Props) => {
         showedColumns={showColumnInputs}
         columnIndex={columnIndex}
         correctTyped={correctTyped}
+        onFocus={() => setRowFocus(rowIndex)}
       />
     </Td>
   )

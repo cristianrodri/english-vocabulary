@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { GlobalContext } from '../../pages/[type]'
 
@@ -34,16 +35,43 @@ const Button = styled.button`
 
 export const Actions = () => {
   const { showInputs } = useContext(GlobalContext)
+  const router = useRouter()
+  const pathname = router.query.type
+  const isNumbers = pathname === 'numbers'
+  const isAlphabet = pathname === 'alphabet'
+  const isIrregularAndCommonVerbs =
+    pathname === 'common-verbs' || pathname === 'irregular-verbs'
+  const isRegularVerbs = pathname === 'regular-verbs'
+  let englishArr: number[]
+  let spanishArr: number[]
 
-  const handlePractice = (columnIndex: number) => () => {
+  if (isIrregularAndCommonVerbs) {
+    englishArr = [0, 1, 2]
+    spanishArr = [3]
+  } else if (isRegularVerbs) {
+    englishArr = [0, 1]
+    spanishArr = [2]
+  } else {
+    englishArr = [0]
+    spanishArr = [1]
+  }
+
+  const handlePractice = (columnIndex: number[]) => () => {
     showInputs(columnIndex)
   }
+
   return (
     <Container>
-      <Practice>
-        <Button onClick={handlePractice(0)}>Practice English</Button>
-        <Button onClick={handlePractice(1)}>Practice Spanish</Button>
-      </Practice>
+      {!isAlphabet && (
+        <Practice>
+          <Button onClick={handlePractice(englishArr)}>
+            Practice {isNumbers ? 'Numbers' : 'English'}
+          </Button>
+          <Button onClick={handlePractice(spanishArr)}>
+            Practice {isNumbers ? 'Number word' : 'Spanish'}
+          </Button>
+        </Practice>
+      )}
       <Button>Filter not learned words</Button>
     </Container>
   )
