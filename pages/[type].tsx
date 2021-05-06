@@ -44,8 +44,10 @@ interface IContext {
   showColumnInputs: number[]
   words: string[]
   rowFocus: number
+  columnFocus: number
   showInputs: (column: number[]) => void
   setRowFocus: Dispatch<SetStateAction<number>>
+  setColumnFocus: Dispatch<SetStateAction<number>>
   // getWords: (column: string[]) => void
   reset: () => void
 }
@@ -54,8 +56,10 @@ const contextDefaultValues: IContext = {
   showColumnInputs: [],
   words: [],
   rowFocus: 0,
+  columnFocus: 0,
   showInputs: () => {},
   setRowFocus: () => {},
+  setColumnFocus: () => {},
   // getWords: () => {},
   reset: () => {}
 }
@@ -67,6 +71,7 @@ const VocabularyType = ({ title, data }: StaticProps) => {
   const [showColumnInputs, setShowColumnInput] = useState<number[]>([])
   const [words, setWords] = useState<string[]>(data)
   const [rowFocus, setRowFocus] = useState(0)
+  const [columnFocus, setColumnFocus] = useState(0)
 
   const showInputs = (columnIndex: number[]) => {
     setShowColumnInput(columnIndex)
@@ -79,6 +84,7 @@ const VocabularyType = ({ title, data }: StaticProps) => {
   const reset = () => {
     setShowColumnInput([])
     setWords([])
+    setRowFocus(0)
   }
 
   useEffect(() => {
@@ -93,9 +99,11 @@ const VocabularyType = ({ title, data }: StaticProps) => {
         showColumnInputs,
         words,
         rowFocus,
+        columnFocus,
         showInputs,
         reset,
-        setRowFocus
+        setRowFocus,
+        setColumnFocus
       }}
     >
       <Layout title={titleCaptalized} banner={title}>

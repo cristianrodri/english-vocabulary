@@ -34,7 +34,7 @@ const Button = styled.button`
 `
 
 export const Actions = () => {
-  const { showInputs } = useContext(GlobalContext)
+  const { showInputs, setColumnFocus } = useContext(GlobalContext)
   const router = useRouter()
   const pathname = router.query.type
   const isNumbers = pathname === 'numbers'
@@ -44,6 +44,7 @@ export const Actions = () => {
   const isRegularVerbs = pathname === 'regular-verbs'
   let englishArr: number[]
   let spanishArr: number[]
+  let columnFocus: number
 
   if (isIrregularAndCommonVerbs) {
     englishArr = [0, 1, 2]
@@ -56,18 +57,31 @@ export const Actions = () => {
     spanishArr = [1]
   }
 
-  const handlePractice = (columnIndex: number[]) => () => {
-    showInputs(columnIndex)
+  const handlePractice = (lang: 'english' | 'spanish') => () => {
+    if (lang === 'english') {
+      showInputs(englishArr)
+      columnFocus = 0
+    } else {
+      showInputs(spanishArr)
+
+      isIrregularAndCommonVerbs
+        ? (columnFocus = 3)
+        : isRegularVerbs
+        ? (columnFocus = 2)
+        : (columnFocus = 1)
+    }
+
+    setColumnFocus(columnFocus)
   }
 
   return (
     <Container>
       {!isAlphabet && (
         <Practice>
-          <Button onClick={handlePractice(englishArr)}>
+          <Button onClick={handlePractice('english')}>
             Practice {isNumbers ? 'Numbers' : 'English'}
           </Button>
-          <Button onClick={handlePractice(spanishArr)}>
+          <Button onClick={handlePractice('spanish')}>
             Practice {isNumbers ? 'Number word' : 'Spanish'}
           </Button>
         </Practice>

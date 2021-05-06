@@ -37,9 +37,14 @@ const Input = styled.input<InputProps & Omit<Props, 'word' | 'rowIndex'>>`
 `
 
 export const Column = ({ word, columnIndex, rowIndex }: Props) => {
-  const { showColumnInputs, words, rowFocus, setRowFocus } = useContext(
-    GlobalContext
-  )
+  const {
+    showColumnInputs,
+    words,
+    rowFocus,
+    setRowFocus,
+    columnFocus,
+    setColumnFocus
+  } = useContext(GlobalContext)
   const [value, setValue] = useState('')
   const ref = useRef<HTMLInputElement>(null)
   const [correctTyped, setCorrectTyped] = useState(false)
@@ -53,7 +58,8 @@ export const Column = ({ word, columnIndex, rowIndex }: Props) => {
   useEffect(() => {
     if (
       rowIndex === rowFocus &&
-      showColumnInputs.includes(columnIndex) &&
+      columnIndex === columnFocus &&
+      // showColumnInputs.includes(columnIndex) &&
       !correctTyped
     )
       ref.current?.focus()
@@ -67,10 +73,11 @@ export const Column = ({ word, columnIndex, rowIndex }: Props) => {
   const checkWord = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       // check if word is correct
-      // console.log(words[rowIndex])
-      // console.log(words[rowIndex].split('='))
+      console.log(words)
+      console.log(words[rowIndex])
+      console.log(words[rowIndex].split(/, |=/))
 
-      if (value === words[rowIndex].split('=')[columnIndex]) {
+      if (value === words[rowIndex].split(/, |=/)[columnIndex]) {
         console.log('Correct')
         setCorrectTyped(true)
         setRowFocus(rowFocus + 1)
