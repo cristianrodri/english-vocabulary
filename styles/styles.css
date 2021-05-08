@@ -11,7 +11,7 @@
   --fourth-color-alpha: rgba(63, 200, 63, 0.8);
   --blue-color: #1492f5;
   --blue-color-alpha: rgba(20, 146, 245, 0.8);
-  --wrong: rgba(204, 20, 20);
+  --wrong: rgb(190, 48, 48);
   --gutter: 16px;
   --h1: 1.4rem;
   --h2: 1.2rem;

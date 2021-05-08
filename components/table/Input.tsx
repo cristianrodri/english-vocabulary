@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
+import { FaEye } from 'react-icons/fa'
 import styled from 'styled-components'
 import { GlobalContext } from '../../pages/[type]'
 import { ColumnProps } from './Column'
@@ -8,6 +9,7 @@ interface InputProps {
   showedColumns: number[]
   correctTyped: boolean
   columnIndex: number
+  isWrong: boolean
 }
 
 const StyledInput = styled.input<InputProps>`
@@ -19,11 +21,19 @@ const StyledInput = styled.input<InputProps>`
   width: 100%;
   border: 0;
   text-align: center;
+  background-color: ${props => (props.isWrong ? 'var(--wrong)' : '#fff')};
+  /* color: ${props => (props.isWrong ? '#eee' : '#000')}; */
   font-size: 1rem;
-  display: ${(props) =>
+  display: ${props =>
     props.showedColumns.includes(props.columnIndex) && !props.correctTyped
       ? 'block'
       : 'none'};
+`
+
+const Icon = styled(FaEye)`
+  position: absolute;
+  top: 0;
+  right: 0;
 `
 
 export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
@@ -36,6 +46,7 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
     setColumnFocus
   } = useContext(GlobalContext)
   const [value, setValue] = useState('')
+  const [isWrong, setIsWrong] = useState(false)
   const ref = useRef<HTMLInputElement>(null)
   const [correctTyped, setCorrectTyped] = useState(false)
   const router = useRouter()
@@ -67,8 +78,9 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
       const columnLength = words[rowIndex].split(/, |=/).length
       const correctWord = word.split('/')
 
-      if (correctWord.includes(value)) {
+      if (correctWord.includes(value.toLowerCase())) {
         setCorrectTyped(true)
+        setIsWrong(false)
 
         // when is verbs AND columnFocus could change
         if (isVerbsPage && columnLength - columnFocus > 2) {
@@ -78,6 +90,7 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
           setColumnFocus(0)
         }
       } else {
+        setIsWrong(true)
         console.log('Incorrect')
       }
     }
@@ -89,16 +102,20 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
   }
 
   return (
-    <StyledInput
-      ref={ref}
-      type="text"
-      onKeyDown={checkWord}
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      showedColumns={showColumnInputs}
-      columnIndex={columnIndex}
-      correctTyped={correctTyped}
-      onFocus={handleFocus}
-    />
+    <>
+      <StyledInput
+        ref={ref}
+        type="text"
+        onKeyDown={checkWord}
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        onFocus={handleFocus}
+        showedColumns={showColumnInputs}
+        columnIndex={columnIndex}
+        correctTyped={correctTyped}
+        isWrong={isWrong}
+      />
+      <Icon title="See correct word" />
+    </>
   )
 }
