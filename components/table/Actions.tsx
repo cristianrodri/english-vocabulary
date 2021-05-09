@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import { GlobalContext } from '../../pages/[type]'
+import { getWordsStorage } from '../../utils/storage'
 
 const Container = styled.div`
   display: flex;
@@ -34,9 +35,11 @@ const Button = styled.button`
 `
 
 export const Actions = () => {
-  const { showInputs, setColumnFocus } = useContext(GlobalContext)
+  const { words, showInputs, setColumnFocus, setWords } = useContext(
+    GlobalContext
+  )
   const router = useRouter()
-  const pathname = router.query.type
+  const pathname = router.query.type as string
   const isNumbers = pathname === 'numbers'
   const isAlphabet = pathname === 'alphabet'
   const isIrregularAndCommonVerbs =
@@ -74,6 +77,15 @@ export const Actions = () => {
     setColumnFocus(columnFocus)
   }
 
+  const handleFiltered = () => {
+    const getStorage = getWordsStorage(pathname)
+
+    // filter words by NOT learned yet (by checking if exists in localStorage)
+    const filteredWords = words.filter(word => getStorage.includes(word))
+
+    setWords(filteredWords)
+  }
+
   return (
     <Container>
       {!isAlphabet && (
@@ -86,7 +98,7 @@ export const Actions = () => {
           </Button>
         </Practice>
       )}
-      <Button>Filter not learned words</Button>
+      <Button onClick={handleFiltered}>Filter not learned words</Button>
     </Container>
   )
 }

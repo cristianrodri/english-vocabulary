@@ -18,7 +18,7 @@ export interface StaticProps {
 }
 
 export async function getStaticPaths() {
-  const paths = Object.keys(vocabulary.types).map((item) => {
+  const paths = Object.keys(vocabulary.types).map(item => {
     return {
       params: { type: item }
     }
@@ -32,7 +32,7 @@ export async function getStaticPaths() {
 export const getStaticProps: GetStaticProps<
   StaticProps,
   { type: string }
-> = async (context) => {
+> = async context => {
   const title = context.params?.type as VocabularyTypes
   const data = vocabulary.types[context.params?.type as VocabularyTypes].split(
     ';'
@@ -48,7 +48,7 @@ interface IContext {
   showInputs: (column: number[]) => void
   setRowFocus: Dispatch<SetStateAction<number>>
   setColumnFocus: Dispatch<SetStateAction<number>>
-  // getWords: (column: string[]) => void
+  setWords: Dispatch<SetStateAction<string[]>>
   reset: () => void
 }
 
@@ -60,7 +60,7 @@ const contextDefaultValues: IContext = {
   showInputs: () => {},
   setRowFocus: () => {},
   setColumnFocus: () => {},
-  // getWords: () => {},
+  setWords: () => {},
   reset: () => {}
 }
 
@@ -76,10 +76,6 @@ const VocabularyType = ({ title, data }: StaticProps) => {
   const showInputs = (columnIndex: number[]) => {
     setShowColumnInput(columnIndex)
   }
-
-  // const getWords = (words: string[]) => {
-  //   setWords(words)
-  // }
 
   const reset = () => {
     setShowColumnInput([])
@@ -102,6 +98,7 @@ const VocabularyType = ({ title, data }: StaticProps) => {
         columnFocus,
         showInputs,
         reset,
+        setWords,
         setRowFocus,
         setColumnFocus
       }}
