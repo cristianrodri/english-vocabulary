@@ -44,7 +44,7 @@ const Card: FC<{ title: string }> = ({ title }) => {
   return (
     <Article>
       <ImageContainer>
-        <Image src={`/${title}.jpg`} width={300} height={200} />
+        <Image src={`/${title}.jpg`} width={300} height={200} alt={title} />
       </ImageContainer>
       <Link href={`/${title}`}>
         <a>
