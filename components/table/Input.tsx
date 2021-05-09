@@ -22,7 +22,6 @@ const StyledInput = styled.input<InputProps>`
   border: 0;
   text-align: center;
   background-color: ${props => (props.isWrong ? 'var(--wrong)' : '#fff')};
-  /* color: ${props => (props.isWrong ? '#eee' : '#000')}; */
   font-size: 1rem;
   display: ${props =>
     props.showedColumns.includes(props.columnIndex) && !props.correctTyped
@@ -30,10 +29,17 @@ const StyledInput = styled.input<InputProps>`
       : 'none'};
 `
 
-const Icon = styled(FaEye)`
+const Icon = styled.span<Omit<InputProps, 'isWrong'>>`
   position: absolute;
   top: 0;
   right: 0;
+  bottom: 0;
+  margin-right: 0.5em;
+  align-items: center;
+  display: ${props =>
+    props.showedColumns.includes(props.columnIndex) && !props.correctTyped
+      ? 'flex'
+      : 'none'};
 `
 
 export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
@@ -101,6 +107,11 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
     setColumnFocus(columnIndex)
   }
 
+  const correctWord = () => {
+    setValue(word)
+    ref.current?.focus()
+  }
+
   return (
     <>
       <StyledInput
@@ -115,7 +126,14 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
         correctTyped={correctTyped}
         isWrong={isWrong}
       />
-      <Icon title="See correct word" />
+      <Icon
+        showedColumns={showColumnInputs}
+        columnIndex={columnIndex}
+        correctTyped={correctTyped}
+        onClick={correctWord}
+      >
+        <FaEye color="rgb(190, 48, 48)" title="See correct word" size={18} />
+      </Icon>
     </>
   )
 }
