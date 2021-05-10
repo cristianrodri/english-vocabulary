@@ -1,5 +1,5 @@
 import { VocabularyTypes } from '../../pages/[type]'
-import vocabulary from '../../public/vocabulary.json'
+import vocabulary from '../../../public/vocabulary.json'
 import styled, { css } from 'styled-components'
 
 interface Props {

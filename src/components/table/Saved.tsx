@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { FC, useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { GlobalContext } from '../../pages/[type]'
+import { GlobalContext, IContext } from '../../pages/[type]'
 import { getWordsStorage } from '../../utils/storage'
 
 const SavedStyled = styled.span<{ isSaved: boolean }>`
@@ -17,7 +17,7 @@ const SavedStyled = styled.span<{ isSaved: boolean }>`
 `
 
 export const Saved: FC<{ rowIndex: number }> = ({ rowIndex }) => {
-  const { words } = useContext(GlobalContext)
+  const { words } = useContext(GlobalContext) as IContext
   const router = useRouter()
   const pathname = router.query.type as string
   const [isSaved, setIsSaved] = useState(false)

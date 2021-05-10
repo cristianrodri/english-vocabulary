@@ -6,7 +6,7 @@ import {
   useState
 } from 'react'
 import { GetStaticProps } from 'next'
-import vocabulary from '../public/vocabulary.json'
+import vocabulary from '../../public/vocabulary.json'
 import Layout from '../components/Layout'
 import { customTitle } from '../utils/strings'
 import { Container } from '../components/table/Container'
@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps<
   return { props: { title, data } }
 }
 
-interface IContext {
+export interface IContext {
   showColumnInputs: number[]
   words: string[]
   rowFocus: number
@@ -52,19 +52,7 @@ interface IContext {
   reset: () => void
 }
 
-const contextDefaultValues: IContext = {
-  showColumnInputs: [],
-  words: [],
-  rowFocus: 0,
-  columnFocus: 0,
-  showInputs: () => {},
-  setRowFocus: () => {},
-  setColumnFocus: () => {},
-  setWords: () => {},
-  reset: () => {}
-}
-
-export const GlobalContext = createContext<IContext>(contextDefaultValues)
+export const GlobalContext = createContext<IContext | null>(null)
 
 const VocabularyType = ({ title, data }: StaticProps) => {
   const titleCaptalized = customTitle(title)

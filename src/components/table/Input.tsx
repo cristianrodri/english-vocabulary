@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
 import { FaEye } from 'react-icons/fa'
 import styled from 'styled-components'
-import { GlobalContext } from '../../pages/[type]'
+import { GlobalContext, IContext } from '../../pages/[type]'
 import { ColumnProps } from './Column'
 
 interface InputProps {
@@ -50,7 +50,7 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
     setRowFocus,
     columnFocus,
     setColumnFocus
-  } = useContext(GlobalContext)
+  } = useContext(GlobalContext) as IContext
   const [value, setValue] = useState('')
   const [isWrong, setIsWrong] = useState(false)
   const ref = useRef<HTMLInputElement>(null)

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import { GlobalContext } from '../../pages/[type]'
+import { GlobalContext, IContext } from '../../pages/[type]'
 import { getWordsStorage } from '../../utils/storage'
 
 const Container = styled.div`
@@ -37,7 +37,7 @@ const Button = styled.button`
 export const Actions = () => {
   const { words, showInputs, setColumnFocus, setWords } = useContext(
     GlobalContext
-  )
+  ) as IContext
   const router = useRouter()
   const pathname = router.query.type as string
   const isNumbers = pathname === 'numbers'

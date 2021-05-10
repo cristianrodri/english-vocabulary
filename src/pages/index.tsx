@@ -1,18 +1,18 @@
 import Layout from '../components/Layout'
 import styled from 'styled-components'
 import { GetStaticProps } from 'next'
-import vocabulary from '../public/vocabulary.json'
-import Card from './../components/Card'
+import vocabulary from '../../public/vocabulary.json'
+import Card from '../components/Card'
 
 interface Props {
   titles: string[]
 }
 
-export const getStaticProps: GetStaticProps<Props, {}> = async () => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
-      titles: Object.keys(vocabulary.types),
-    },
+      titles: Object.keys(vocabulary.types)
+    }
   }
 }
 
@@ -28,7 +28,7 @@ const Main = styled.main`
 const IndexPage = ({ titles }: Props) => (
   <Layout title="home" banner="london">
     <Main>
-      {titles.map((title) => (
+      {titles.map(title => (
         <Card key={title} title={title} />
       ))}
     </Main>

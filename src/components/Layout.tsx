@@ -35,10 +35,10 @@ const H1 = styled.h1`
   color: #eee;
 `
 
-const Layout: FC<{ title: string; banner: string }> = ({
+const Layout: FC<{ title: string; banner?: string }> = ({
   children,
   title,
-  banner,
+  banner
 }) => (
   <>
     <Head>
