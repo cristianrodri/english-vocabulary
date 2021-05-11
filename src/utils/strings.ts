@@ -6,3 +6,5 @@ export const customTitle = (title: string): string =>
     .split('-')
     .map(text => text[0].toUpperCase() + text.slice(1))
     .join(' ')
+
+export const splittedWords = (words: string): string[] => words.split(/, |=/)

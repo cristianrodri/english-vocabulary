@@ -1,9 +1,9 @@
-import { useRouter } from 'next/router'
 import { KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
 import { FaEye } from 'react-icons/fa'
 import styled from 'styled-components'
 import { GlobalContext, IContext } from '../../pages/[type]'
 import { ColumnProps } from './Column'
+import { splittedWords } from './../../utils/strings'
 
 interface InputProps {
   showedColumns: number[]
@@ -18,6 +18,7 @@ const StyledInput = styled.input<InputProps>`
   left: 0;
   right: 0;
   bottom: 0;
+  padding: 0.5em;
   width: 100%;
   border: 0;
   text-align: center;
@@ -55,12 +56,6 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
   const [isWrong, setIsWrong] = useState(false)
   const ref = useRef<HTMLInputElement>(null)
   const [correctTyped, setCorrectTyped] = useState(false)
-  const router = useRouter()
-  const pathname = router.query.type
-  const isVerbsPage =
-    pathname === 'common-verbs' ||
-    pathname === 'irregular-verbs' ||
-    pathname === 'regular-verbs'
 
   useEffect(() => {
     setCorrectTyped(false)
@@ -81,23 +76,24 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
   const checkWord = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       // check if word is correct
-      const columnLength = words[rowIndex].split(/, |=/).length
+      const columnLength = splittedWords(words[rowIndex]).length
       const correctWord = word.split('/')
 
-      if (correctWord.includes(value.toLowerCase())) {
+      if (word === value || correctWord.includes(value.toLowerCase())) {
         setCorrectTyped(true)
         setIsWrong(false)
 
-        // when is verbs AND columnFocus could change
-        if (isVerbsPage && columnLength - columnFocus > 2) {
+        if (columnLength - columnFocus > 2) {
           setColumnFocus(columnFocus + 1)
+        } else if (columnFocus === columnLength - 1) {
+          setRowFocus(rowFocus + 1)
+          setColumnFocus(columnLength - 1)
         } else {
           setRowFocus(rowFocus + 1)
           setColumnFocus(0)
         }
       } else {
         setIsWrong(true)
-        console.log('Incorrect')
       }
     }
   }
@@ -132,7 +128,11 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
         correctTyped={correctTyped}
         onClick={correctWord}
       >
-        <FaEye color="rgb(190, 48, 48)" title="See correct word" size={18} />
+        <FaEye
+          color={isWrong ? '#fff' : 'rgb(190, 48, 48)'}
+          title="See correct word"
+          size={18}
+        />
       </Icon>
     </>
   )

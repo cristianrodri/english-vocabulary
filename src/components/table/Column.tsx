@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Input } from './Input'
 import { Saved } from './Saved'
+import { Word } from './Word'
 
 export interface ColumnProps {
   word: string
@@ -11,27 +12,14 @@ export interface ColumnProps {
 
 const Td = styled.td`
   position: relative;
-  padding: 0.5em;
   transition: all 0.5s;
   cursor: pointer;
 `
 
-const Word = styled.span`
-  position: relative;
-  display: block;
-  width: 100%;
-`
-
-export const Column = ({ word, columnIndex, rowIndex }: ColumnProps) => {
-  const handleTranslation = () => {
-    // console.log(word)
-  }
-
-  return (
-    <Td onClick={handleTranslation}>
-      {columnIndex === 0 && <Saved rowIndex={rowIndex} />}
-      <Word>{word}</Word>
-      <Input word={word} rowIndex={rowIndex} columnIndex={columnIndex} />
-    </Td>
-  )
-}
+export const Column = ({ word, columnIndex, rowIndex }: ColumnProps) => (
+  <Td>
+    {columnIndex === 0 && <Saved rowIndex={rowIndex} />}
+    <Word word={word} columnIndex={columnIndex} />
+    <Input word={word} rowIndex={rowIndex} columnIndex={columnIndex} />
+  </Td>
+)
