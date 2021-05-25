@@ -1,9 +1,9 @@
 import { KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
 import { FaEye } from 'react-icons/fa'
 import styled from 'styled-components'
-import { GlobalContext, IContext } from '../../pages/[type]'
 import { ColumnProps } from './Column'
 import { splittedWords } from './../../utils/strings'
+import { GlobalContext, IContext } from '../../context/GlobalContext'
 
 interface InputProps {
   showedColumns: number[]
@@ -67,7 +67,7 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
     if (
       rowIndex === rowFocus &&
       columnIndex === columnFocus &&
-      // showColumnInputs.includes(columnIndex) &&
+      showColumnInputs.includes(columnIndex) &&
       !correctTyped
     )
       ref.current?.focus()

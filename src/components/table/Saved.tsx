@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { FC, useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { GlobalContext, IContext } from '../../pages/[type]'
+import { GlobalContext, IContext } from '../../context/GlobalContext'
 import { getWordsStorage } from '../../utils/storage'
 
 const SavedStyled = styled.span<{ isSaved: boolean }>`
@@ -25,7 +25,8 @@ export const Saved: FC<{ rowIndex: number }> = ({ rowIndex }) => {
   useEffect(() => {
     const prevStorage = getWordsStorage(pathname)
 
-    if (prevStorage.includes(words[rowIndex])) setIsSaved(true)
+    // if (prevStorage.includes(words[rowIndex])) setIsSaved(true)
+    if (prevStorage.includes('')) setIsSaved(true)
   }, [])
 
   const handleClick = () => {

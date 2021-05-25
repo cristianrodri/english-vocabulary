@@ -1,67 +1,62 @@
-import { VocabularyTypes } from '../../pages/[type]'
-import vocabulary from '../../../public/vocabulary.json'
-import styled, { css } from 'styled-components'
+// import { VocabularyTypes } from '../../pages/[type]'
+// import vocabulary from '../../../public/vocabulary.json'
+import { useContext } from 'react'
+import styled from 'styled-components'
+import { GlobalContext, IContext } from '../../context/GlobalContext'
 
-interface Props {
-  title: VocabularyTypes
-}
+// interface Props {
+//   title: string
+// }
 
-type PartialTitles = { [P in keyof typeof vocabulary.types]?: string }
-type PartialElement = { [P in keyof typeof vocabulary.types]?: JSX.Element }
+// type PartialTitles = { [P in keyof typeof vocabulary.types]?: string }
+// type PartialElement = { [P in keyof typeof vocabulary.types]?: JSX.Element }
 
 const Row = styled.tr`
   background-color: var(--third-color);
 `
 
-const col = css`
+const ColumnHeader = styled.th`
   padding: 0.3em;
   font-weight: 700;
   color: hsl(0, 15%, 94%);
 `
 
-const Column = styled.td`
-  ${col}
-`
+export const Header = () => {
+  const { columnNames } = useContext(GlobalContext) as IContext
+  // const firstTheadTitles: PartialTitles = {
+  //   numbers: 'Number'
+  // }
 
-const ColumnHeader = styled.th`
-  ${col}
-`
+  // const lastTheadTitles: PartialTitles = {
+  //   alphabet: 'Pronuntiation',
+  //   numbers: 'English'
+  // }
 
-export const Header = ({ title }: Props) => {
-  const firstTheadTitles: PartialTitles = {
-    numbers: 'Number'
-  }
+  // const past = <ColumnHeader>Past</ColumnHeader>
 
-  const lastTheadTitles: PartialTitles = {
-    alphabet: 'Pronuntiation',
-    numbers: 'English'
-  }
+  // const pastAndParticiple = (
+  //   <>
+  //     <ColumnHeader>Past</ColumnHeader>
+  //     <ColumnHeader>Participle</ColumnHeader>
+  //   </>
+  // )
+  // const checkPastAndParticiple: PartialElement = {
+  //   'regular-verbs': past,
+  //   'irregular-verbs': pastAndParticiple,
+  //   'common-verbs': pastAndParticiple
+  // }
 
-  const past = <ColumnHeader>Past</ColumnHeader>
+  // const firstThead = firstTheadTitles?.[title] ?? 'English' // if the title is 'numbers' the first column of th will be 'Number', otherwise will be 'English'
 
-  const pastAndParticiple = (
-    <>
-      <ColumnHeader>Past</ColumnHeader>
-      <ColumnHeader>Participle</ColumnHeader>
-    </>
-  )
-  const checkPastAndParticiple: PartialElement = {
-    'regular-verbs': past,
-    'irregular-verbs': pastAndParticiple,
-    'common-verbs': pastAndParticiple
-  }
+  // const lastThead = lastTheadTitles?.[title] ?? 'Spanish'
 
-  const firstThead = firstTheadTitles?.[title] ?? 'English' // if the title is 'numbers' the first column of th will be 'Number', otherwise will be 'English'
-
-  const lastThead = lastTheadTitles?.[title] ?? 'Spanish'
-
-  const addPastParticiple = checkPastAndParticiple?.[title] ?? null
+  // const addPastParticiple = checkPastAndParticiple?.[title] ?? null
   return (
     <thead>
       <Row>
-        <Column>{firstThead}</Column>
-        {addPastParticiple}
-        <Column>{lastThead}</Column>
+        {columnNames.map(columnName => (
+          <ColumnHeader key={columnName}>{columnName}</ColumnHeader>
+        ))}
       </Row>
     </thead>
   )

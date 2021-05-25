@@ -1,17 +1,18 @@
 import Layout from '../components/Layout'
 import styled from 'styled-components'
 import { GetStaticProps } from 'next'
-import vocabulary from '../../public/vocabulary.json'
 import Card from '../components/Card'
+import { getSheetNames } from '../services/sheets'
 
 interface Props {
   titles: string[]
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
+  const titles = await getSheetNames()
   return {
     props: {
-      titles: Object.keys(vocabulary.types)
+      titles
     }
   }
 }

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { GlobalContext, IContext, StaticProps } from '../../pages/[type]'
+import { GlobalContext, IContext } from '../../context/GlobalContext'
 import { Actions } from './Actions'
 import { Header } from './Header'
 import { Row } from './Row'
@@ -27,7 +27,7 @@ const Table = styled.table`
   font-size: var(--little-big);
 `
 
-export const Container = ({ title }: Omit<StaticProps, 'data'>) => {
+export const Container = () => {
   const { words } = useContext(GlobalContext) as IContext
 
   return (
@@ -35,7 +35,7 @@ export const Container = ({ title }: Omit<StaticProps, 'data'>) => {
       <Title>Translations ({words.length})</Title>
       <Actions />
       <Table>
-        <Header title={title} />
+        <Header />
         <tbody>
           {words.map((bothWords, index) => (
             <Row key={bothWords} bothWords={bothWords} rowIndex={index} />

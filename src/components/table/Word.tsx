@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { GlobalContext, IContext } from '../../pages/[type]'
+import { GlobalContext, IContext } from '../../context/GlobalContext'
 import { splittedWords } from '../../utils/strings'
 
 interface Props {

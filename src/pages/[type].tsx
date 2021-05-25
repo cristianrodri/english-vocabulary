@@ -1,26 +1,20 @@
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState
-} from 'react'
 import { GetStaticProps } from 'next'
-import vocabulary from '../../public/vocabulary.json'
 import Layout from '../components/Layout'
 import { customTitle } from '../utils/strings'
 import { Container } from '../components/table/Container'
-export type VocabularyTypes = keyof typeof vocabulary.types
-
+import { getSheetData, getSheetNames } from './../services/sheets'
+import { Context } from '../context/GlobalContext'
 export interface StaticProps {
-  title: VocabularyTypes
-  data: string[]
+  title: string
+  words: string[]
+  columnNames: string[]
 }
 
 export async function getStaticPaths() {
-  const paths = Object.keys(vocabulary.types).map(item => {
+  const sheetNames = await getSheetNames()
+  const paths = sheetNames.map(sheetName => {
     return {
-      params: { type: item }
+      params: { type: sheetName }
     }
   })
   return {
@@ -33,68 +27,20 @@ export const getStaticProps: GetStaticProps<
   StaticProps,
   { type: string }
 > = async context => {
-  const title = context.params?.type as VocabularyTypes
-  const data = vocabulary.types[context.params?.type as VocabularyTypes].split(
-    ';'
-  )
-  return { props: { title, data } }
+  const title = context.params?.type as string
+  const { words, columnNames } = await getSheetData(title)
+  return { props: { title, words, columnNames } }
 }
 
-export interface IContext {
-  showColumnInputs: number[]
-  words: string[]
-  rowFocus: number
-  columnFocus: number
-  showInputs: (column: number[]) => void
-  setRowFocus: Dispatch<SetStateAction<number>>
-  setColumnFocus: Dispatch<SetStateAction<number>>
-  setWords: Dispatch<SetStateAction<string[]>>
-  reset: () => void
-}
-
-export const GlobalContext = createContext<IContext | null>(null)
-
-const VocabularyType = ({ title, data }: StaticProps) => {
+const VocabularyType = ({ title, words, columnNames }: StaticProps) => {
   const titleCaptalized = customTitle(title)
-  const [showColumnInputs, setShowColumnInput] = useState<number[]>([])
-  const [words, setWords] = useState<string[]>(data)
-  const [rowFocus, setRowFocus] = useState(0)
-  const [columnFocus, setColumnFocus] = useState(0)
-
-  const showInputs = (columnIndex: number[]) => {
-    setShowColumnInput(columnIndex)
-  }
-
-  const reset = () => {
-    setShowColumnInput([])
-    setWords([])
-    setRowFocus(0)
-  }
-
-  useEffect(() => {
-    return () => {
-      reset()
-    }
-  }, [])
 
   return (
-    <GlobalContext.Provider
-      value={{
-        showColumnInputs,
-        words,
-        rowFocus,
-        columnFocus,
-        showInputs,
-        reset,
-        setWords,
-        setRowFocus,
-        setColumnFocus
-      }}
-    >
+    <Context data={words} columnNames={columnNames}>
       <Layout title={titleCaptalized} banner={title}>
-        <Container title={title} />
+        <Container />
       </Layout>
-    </GlobalContext.Provider>
+    </Context>
   )
 }
 
