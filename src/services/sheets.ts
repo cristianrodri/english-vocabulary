@@ -21,9 +21,10 @@ export const getSheetNames = async (): Promise<string[]> => {
 export const getSheetData = async (pathname: string) => {
   const data = await getSheet(pathname)
   const columnNames: string[] = data[pathname].columnNames
-  const words: string[] = data[pathname].elements.map(
-    (word: { [key: string]: string }) =>
-      `${word[columnNames[0]]}=${word[columnNames[1]]}`
+  const words: string[] = data[
+    pathname
+  ].elements.map((word: { [key: string]: string }) =>
+    Object.values(word).join()
   )
 
   return {

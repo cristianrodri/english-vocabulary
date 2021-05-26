@@ -19,7 +19,7 @@ const Tr = styled.tr`
 
 export const Row = ({ bothWords, rowIndex }: Props) => (
   <Tr>
-    {bothWords.split(/, |=/).map((word, i) => (
+    {bothWords.split(/,|=/).map((word, i) => (
       <Column key={word + i} word={word} columnIndex={i} rowIndex={rowIndex} />
     ))}
   </Tr>
