@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps<
 > = async context => {
   const title = context.params?.type as string
   const { words, columnNames } = await getSheetData(title)
-  return { props: { title, words, columnNames } }
+  return { props: { title, words, columnNames }, revalidate: 1 }
 }
 
 const VocabularyType = ({ title, words, columnNames }: StaticProps) => {

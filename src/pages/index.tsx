@@ -13,7 +13,8 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
       titles
-    }
+    },
+    revalidate: 1
   }
 }
 
