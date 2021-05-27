@@ -16,14 +16,13 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
-    // 'plugin:jsx-a11y/recommended',
     'plugin:eslint-comments/recommended',
     'plugin:prettier/recommended'
   ],
   rules: {
     'no-unused-vars': 'off',
     'comma-dangle': [
-      'error',
+      'warn',
       {
         arrays: 'never',
         objects: 'never',
