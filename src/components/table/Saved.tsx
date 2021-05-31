@@ -5,15 +5,23 @@ import { GlobalContext, IContext } from '../../context/GlobalContext'
 import { getWordsStorage } from '../../utils/storage'
 
 const SavedStyled = styled.span<{ isSaved: boolean }>`
+  --left: -40px;
+  --width: 35px;
+
   position: absolute;
   top: 0;
-  left: -40px;
+  left: var(--left);
   display: block;
-  width: 35px;
+  width: var(--width);
   height: 100%;
   cursor: pointer;
   background-color: ${props =>
     props.isSaved ? 'var(--third-color)' : 'var(--fourth-color)'};
+
+  @media screen and (max-width: 680px) {
+    --left: -35px;
+    --width: 30px;
+  }
 `
 
 export const Saved: FC<{ rowIndex: number }> = ({ rowIndex }) => {

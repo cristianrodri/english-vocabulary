@@ -8,15 +8,21 @@ interface Props {
   columnIndex: number
 }
 
-const Styled = styled.span`
+const Styled = styled.span<{ columnLength: number }>`
   position: relative;
   display: block;
   width: 100%;
   padding: 0.5em;
+  font-size: ${({ columnLength }) => (columnLength > 2 ? '0.8em' : '0.9em')};
+  word-break: break-all;
+
+  @media screen and (min-width: 680px) {
+    font-size: 1em;
+  }
 `
 
 export const Word = ({ word, columnIndex }: Props) => {
-  const { words } = useContext(GlobalContext) as IContext
+  const { words, columnNames } = useContext(GlobalContext) as IContext
 
   const handleClick = () => {
     if (!window.speechSynthesis) return
@@ -33,5 +39,9 @@ export const Word = ({ word, columnIndex }: Props) => {
     }
   }
 
-  return <Styled onClick={handleClick}>{word}</Styled>
+  return (
+    <Styled onClick={handleClick} columnLength={columnNames.length}>
+      {word}
+    </Styled>
+  )
 }

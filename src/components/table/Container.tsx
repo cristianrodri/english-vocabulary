@@ -19,12 +19,12 @@ const Title = styled.h2`
 const Table = styled.table`
   margin: 0 auto;
   margin-top: 1rem;
-  max-width: 90%;
-  width: 35rem;
+  width: min(90%, 35em);
   table-layout: fixed;
   text-align: center;
   margin-bottom: var(--gutter);
   font-size: var(--little-big);
+  overflow-x: auto;
 `
 
 export const Container = () => {
