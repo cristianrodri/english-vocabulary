@@ -33,8 +33,7 @@ export const Saved: FC<{ rowIndex: number }> = ({ rowIndex }) => {
   useEffect(() => {
     const prevStorage = getWordsStorage(pathname)
 
-    // if (prevStorage.includes(words[rowIndex])) setIsSaved(true)
-    if (prevStorage.includes('')) setIsSaved(true)
+    if (prevStorage.includes(words[rowIndex])) setIsSaved(true)
   }, [])
 
   const handleClick = () => {
