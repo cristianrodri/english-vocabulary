@@ -2,7 +2,6 @@ import { KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
 import { FaEye } from 'react-icons/fa'
 import styled from 'styled-components'
 import { ColumnProps } from './Column'
-import { splittedWords } from './../../utils/strings'
 import { GlobalContext, IContext } from '../../context/GlobalContext'
 
 interface InputProps {
@@ -76,7 +75,7 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
   const checkWord = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       // check if word is correct
-      const columnLength = splittedWords(words[rowIndex]).length
+      const columnLength = words[rowIndex].length
       const correctWord = word.split('/')
 
       if (word === value || correctWord.includes(value.toLowerCase())) {

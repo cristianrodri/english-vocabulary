@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { GlobalContext, IContext } from '../../context/GlobalContext'
-import { splittedWords } from '../../utils/strings'
 
 interface Props {
   word: string
@@ -27,7 +26,7 @@ export const Word = ({ word, columnIndex }: Props) => {
   const handleClick = () => {
     if (!window.speechSynthesis) return
 
-    const columnLength = splittedWords(words[0]).length
+    const columnLength = words[0].length
     const utterance = new SpeechSynthesisUtterance(word)
 
     if (columnLength - columnIndex > 1) {

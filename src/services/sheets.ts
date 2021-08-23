@@ -1,34 +1,46 @@
-import Tabletop from 'tabletop'
+import { GoogleSpreadsheet } from 'google-spreadsheet'
 
-const getSheet = async (sheetName: string) => {
-  const data = await Tabletop.init({
-    key: process.env.SHEET_ID,
-    wanted: [sheetName]
-  })
-
-  return data
+interface SheetData {
+  title: string
+  columnNames: string[]
+  words: string[][]
 }
 
-export const getSheetNames = async (): Promise<string[]> => {
-  // get all sheets titles by calling only alphabet sheet (this make load faster, instead of getting all sheets data)
-  const SHEET_NAME = 'alphabet'
-  const data = await getSheet(SHEET_NAME)
-  const titles = data[SHEET_NAME].tabletop.foundSheetNames
+const getSheets = async (): Promise<GoogleSpreadsheet> => {
+  const doc = new GoogleSpreadsheet(process.env.SHEET_ID)
+
+  const private_key = process.env.GOOGLE_PRIVATE_KEY as string
+
+  await doc.useServiceAccountAuth({
+    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL as string,
+    private_key: private_key.replace(/\\n/g, '\n')
+  })
+
+  await doc.loadInfo()
+
+  return doc
+}
+
+export const getSheetNames = async () => {
+  const doc = await getSheets()
+
+  // const docTitlesSheets = doc.sheetsByTitle
+  const titles = Object.keys(doc.sheetsByTitle).sort()
 
   return titles
 }
 
 export const getSheetData = async (pathname: string) => {
-  const data = await getSheet(pathname)
-  const columnNames: string[] = data[pathname].columnNames
-  const words: string[] = data[
-    pathname
-  ].elements.map((word: { [key: string]: string }) =>
-    Object.values(word).join()
-  )
+  const doc = await getSheets()
 
-  return {
-    columnNames,
-    words
+  // Get individual sheet data
+  const data = await doc.sheetsByTitle[pathname].getRows()
+
+  const client: SheetData = {
+    title: data[0]._sheet._rawProperties.title,
+    columnNames: data[0]._sheet.headerValues,
+    words: data.map(row => row._rawData)
   }
+
+  return client
 }

@@ -10,14 +10,15 @@
     "format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "dependencies": {
+    "google-spreadsheet": "^3.1.15",
     "next": "latest",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
-    "styled-components": "^5.2.3",
-    "tabletop": "^1.6.3"
+    "styled-components": "^5.2.3"
   },
   "devDependencies": {
+    "@types/google-spreadsheet": "^3.1.5",
     "@types/node": "^12.12.21",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",

@@ -38,7 +38,11 @@ export const Container = () => {
         <Header />
         <tbody>
           {words.map((bothWords, index) => (
-            <Row key={bothWords} bothWords={bothWords} rowIndex={index} />
+            <Row
+              key={bothWords.join()}
+              bothWords={bothWords}
+              rowIndex={index}
+            />
           ))}
         </tbody>
       </Table>

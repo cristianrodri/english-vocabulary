@@ -6,7 +6,7 @@ import { getSheetData, getSheetNames } from './../services/sheets'
 import { Context } from '../context/GlobalContext'
 export interface StaticProps {
   title: string
-  words: string[]
+  words: string[][]
   columnNames: string[]
 }
 
@@ -17,6 +17,7 @@ export async function getStaticPaths() {
       params: { type: sheetName }
     }
   })
+
   return {
     paths,
     fallback: false
@@ -27,8 +28,8 @@ export const getStaticProps: GetStaticProps<
   StaticProps,
   { type: string }
 > = async context => {
-  const title = context.params?.type as string
-  const { words, columnNames } = await getSheetData(title)
+  const titleParams = context.params?.type as string
+  const { words, columnNames, title } = await getSheetData(titleParams)
   return { props: { title, words, columnNames }, revalidate: 1 }
 }
 

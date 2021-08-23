@@ -4,6 +4,10 @@ import styled from 'styled-components'
 import { GlobalContext, IContext } from '../../context/GlobalContext'
 import { getWordsStorage } from '../../utils/storage'
 
+interface Props {
+  rowIndex: number
+}
+
 const SavedStyled = styled.span<{ isSaved: boolean }>`
   --left: -40px;
   --width: 35px;
@@ -24,7 +28,7 @@ const SavedStyled = styled.span<{ isSaved: boolean }>`
   }
 `
 
-export const Saved: FC<{ rowIndex: number }> = ({ rowIndex }) => {
+export const Saved: FC<Props> = ({ rowIndex }) => {
   const { words } = useContext(GlobalContext) as IContext
   const router = useRouter()
   const pathname = router.query.type as string
@@ -33,7 +37,7 @@ export const Saved: FC<{ rowIndex: number }> = ({ rowIndex }) => {
   useEffect(() => {
     const prevStorage = getWordsStorage(pathname)
 
-    if (prevStorage.includes(words[rowIndex])) setIsSaved(true)
+    if (prevStorage.includes(words[rowIndex].join('='))) setIsSaved(true)
   }, [])
 
   const handleClick = () => {
@@ -45,14 +49,16 @@ export const Saved: FC<{ rowIndex: number }> = ({ rowIndex }) => {
       if (prevStorage.length === 1) {
         localStorage.removeItem(pathname)
       } else {
-        const newStorage = prevStorage.filter(word => word !== words[rowIndex])
+        const newStorage = prevStorage.filter(
+          word => word !== words[rowIndex].join('=')
+        )
 
         localStorage.setItem(pathname, JSON.stringify(newStorage))
       }
     } else {
       localStorage.setItem(
         pathname,
-        JSON.stringify([...prevStorage, words[rowIndex]])
+        JSON.stringify([...prevStorage, words[rowIndex].join('=')])
       )
     }
 

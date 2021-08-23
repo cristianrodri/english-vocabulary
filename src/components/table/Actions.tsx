@@ -81,7 +81,7 @@ export const Actions = () => {
     const getStorage = getWordsStorage(pathname)
 
     // filter words by NOT learned yet (by checking if exists in localStorage)
-    const filteredWords = words.filter(word => getStorage.includes(word))
+    const filteredWords = words.filter(word => getStorage.includes(word[0]))
 
     setWords(filteredWords)
   }

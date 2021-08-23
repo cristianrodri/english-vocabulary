@@ -8,12 +8,12 @@ import {
 } from 'react'
 
 interface Props {
-  data: string[]
+  data: string[][]
   columnNames: string[]
 }
 
 export interface IContext {
-  words: string[]
+  words: string[][]
   columnNames: string[]
   showColumnInputs: number[]
   rowFocus: number
@@ -21,7 +21,7 @@ export interface IContext {
   showInputs: (column: number[]) => void
   setRowFocus: Dispatch<SetStateAction<number>>
   setColumnFocus: Dispatch<SetStateAction<number>>
-  setWords: Dispatch<SetStateAction<string[]>>
+  setWords: Dispatch<SetStateAction<string[][]>>
   reset: () => void
 }
 
