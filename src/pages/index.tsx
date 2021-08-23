@@ -28,7 +28,7 @@ const Main = styled.main`
 `
 
 const IndexPage = ({ titles }: Props) => (
-  <Layout title="home" banner="london">
+  <Layout title="Home" banner="london">
     <Main>
       {titles.map(title => (
         <Card key={title} title={title} />
