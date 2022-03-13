@@ -78,12 +78,12 @@ export const Actions = () => {
   }
 
   const handleFiltered = () => {
-    const getStorage = getWordsStorage(pathname)
+    const storage = getWordsStorage(pathname)
 
     // filter words by NOT learned yet (by checking if exists in localStorage)
-    const filteredWords = words.filter(word => getStorage.includes(word[0]))
+    const filteredWords = words.filter(word => storage.includes(word.join('=')))
 
-    setWords(filteredWords)
+    if (filteredWords.length > 0) setWords(filteredWords)
   }
 
   return (

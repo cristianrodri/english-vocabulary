@@ -15,12 +15,16 @@ const SavedStyled = styled.span<{ isSaved: boolean }>`
   position: absolute;
   top: 0;
   left: var(--left);
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: var(--width);
   height: 100%;
   cursor: pointer;
   background-color: ${props =>
     props.isSaved ? 'var(--third-color)' : 'var(--fourth-color)'};
+  color: var(--primary-color);
+  font-weight: 900;
 
   @media screen and (max-width: 680px) {
     --left: -35px;
@@ -71,6 +75,8 @@ export const Saved: FC<Props> = ({ rowIndex }) => {
       onClick={handleClick}
       isSaved={isSaved}
       title={isSaved ? 'Not learned yet' : 'Learned!'}
-    ></SavedStyled>
+    >
+      {rowIndex + 1}
+    </SavedStyled>
   )
 }
