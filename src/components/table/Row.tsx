@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Column } from './Column'
 
 interface Props {
-  bothWords: string[]
+  eachWord: string[]
   rowIndex: number
 }
 
@@ -17,10 +17,10 @@ const Tr = styled.tr`
   }
 `
 
-export const Row = ({ bothWords, rowIndex }: Props) => (
+export const Row = ({ eachWord, rowIndex }: Props) => (
   <Tr>
-    {bothWords.map((word, i) => (
-      <Column key={word + i} word={word} columnIndex={i} rowIndex={rowIndex} />
+    {eachWord.map((word, i) => (
+      <Column key={word} word={word} columnIndex={i} rowIndex={rowIndex} />
     ))}
   </Tr>
 )
