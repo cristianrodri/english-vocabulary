@@ -2,7 +2,7 @@ import { GoogleSpreadsheet } from 'google-spreadsheet'
 
 interface SheetData {
   title: string
-  columnNames: string[]
+  langColumns: string[]
   words: string[][]
 }
 
@@ -38,7 +38,7 @@ export const getSheetData = async (pathname: string) => {
 
   const client: SheetData = {
     title: data[0]._sheet._rawProperties.title,
-    columnNames: data[0]._sheet.headerValues,
+    langColumns: data[0]._sheet.headerValues,
     words: data.map(row => row._rawData)
   }
 

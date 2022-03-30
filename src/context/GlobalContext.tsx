@@ -9,12 +9,12 @@ import {
 
 interface Props {
   data: string[][]
-  columnNames: string[]
+  langColumns: string[]
 }
 
 export interface IContext {
   words: string[][]
-  columnNames: string[]
+  langColumns: string[]
   showColumnInputs: number[]
   rowFocus: number
   columnFocus: number
@@ -27,7 +27,7 @@ export interface IContext {
 
 export const GlobalContext = createContext<IContext | null>(null)
 
-export const Context: FC<Props> = ({ children, data, columnNames }) => {
+export const Context: FC<Props> = ({ children, data, langColumns }) => {
   const [showColumnInputs, setShowColumnInput] = useState<number[]>([])
   const [words, setWords] = useState(data)
   const [rowFocus, setRowFocus] = useState(0)
@@ -54,7 +54,7 @@ export const Context: FC<Props> = ({ children, data, columnNames }) => {
     <GlobalContext.Provider
       value={{
         words,
-        columnNames,
+        langColumns,
         showColumnInputs,
         rowFocus,
         columnFocus,

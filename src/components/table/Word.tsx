@@ -25,7 +25,7 @@ const Styled = styled.span<{ columnLength: number }>`
 `
 
 export const Word = ({ word, columnIndex }: Props) => {
-  const { words, columnNames } = useContext(GlobalContext) as IContext
+  const { words, langColumns } = useContext(GlobalContext) as IContext
 
   const handleClick = () => {
     const columnLength = words[0].length
@@ -40,7 +40,7 @@ export const Word = ({ word, columnIndex }: Props) => {
   }
 
   return (
-    <Styled onClick={handleClick} columnLength={columnNames.length}>
+    <Styled onClick={handleClick} columnLength={langColumns.length}>
       {word}
     </Styled>
   )

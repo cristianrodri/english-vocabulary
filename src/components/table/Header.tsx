@@ -17,12 +17,12 @@ const ColumnHeader = styled.th`
 `
 
 export const Header = () => {
-  const { columnNames } = useContext(GlobalContext) as IContext
+  const { langColumns } = useContext(GlobalContext) as IContext
 
   return (
     <thead>
       <Row>
-        {columnNames.map(columnName => (
+        {langColumns.map(columnName => (
           <ColumnHeader key={columnName}>{columnName}</ColumnHeader>
         ))}
       </Row>
