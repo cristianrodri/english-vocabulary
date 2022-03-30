@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { GlobalContext, IContext } from '../../context/GlobalContext'
+import { GlobalContext } from '../../context/GlobalContext'
 import { Actions } from './Actions'
 import { Header } from './Header'
 import { Row } from './Row'
@@ -28,7 +28,7 @@ const Table = styled.table`
 `
 
 export const Container = () => {
-  const { words } = useContext(GlobalContext) as IContext
+  const { words } = useContext(GlobalContext)
 
   return (
     <Main>

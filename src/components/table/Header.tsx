@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { GlobalContext, IContext } from '../../context/GlobalContext'
+import { GlobalContext } from '../../context/GlobalContext'
 
 const Row = styled.tr`
   background-color: var(--third-color);
@@ -17,7 +17,7 @@ const ColumnHeader = styled.th`
 `
 
 export const Header = () => {
-  const { langColumns } = useContext(GlobalContext) as IContext
+  const { langColumns } = useContext(GlobalContext)
 
   return (
     <thead>

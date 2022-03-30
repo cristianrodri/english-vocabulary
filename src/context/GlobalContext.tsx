@@ -25,7 +25,7 @@ export interface IContext {
   reset: () => void
 }
 
-export const GlobalContext = createContext<IContext | null>(null)
+export const GlobalContext = createContext({} as IContext)
 
 export const Context: FC<Props> = ({ children, data, langColumns }) => {
   const [showColumnInputs, setShowColumnInput] = useState<number[]>([])

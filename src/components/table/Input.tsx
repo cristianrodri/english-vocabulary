@@ -2,7 +2,7 @@ import { KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
 import { FaEye } from 'react-icons/fa'
 import styled from 'styled-components'
 import { ColumnProps } from './Column'
-import { GlobalContext, IContext } from '../../context/GlobalContext'
+import { GlobalContext } from '../../context/GlobalContext'
 import {
   speechSynthesisEng,
   speechSynthesisSpa
@@ -54,7 +54,7 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
     setRowFocus,
     columnFocus,
     setColumnFocus
-  } = useContext(GlobalContext) as IContext
+  } = useContext(GlobalContext)
   const [value, setValue] = useState('')
   const [isWrong, setIsWrong] = useState(false)
   const ref = useRef<HTMLInputElement>(null)

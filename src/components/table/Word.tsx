@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { GlobalContext, IContext } from '../../context/GlobalContext'
+import { GlobalContext } from '../../context/GlobalContext'
 import {
   speechSynthesisEng,
   speechSynthesisSpa
@@ -25,7 +25,7 @@ const Styled = styled.span<{ columnLength: number }>`
 `
 
 export const Word = ({ word, columnIndex }: Props) => {
-  const { words, langColumns } = useContext(GlobalContext) as IContext
+  const { words, langColumns } = useContext(GlobalContext)
 
   const handleClick = () => {
     const columnLength = words[0].length
