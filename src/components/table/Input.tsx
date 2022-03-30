@@ -3,6 +3,10 @@ import { FaEye } from 'react-icons/fa'
 import styled from 'styled-components'
 import { ColumnProps } from './Column'
 import { GlobalContext, IContext } from '../../context/GlobalContext'
+import {
+  speechSynthesisEng,
+  speechSynthesisSpa
+} from '../../utils/speechSynthesis'
 
 interface InputProps {
   showedColumns: number[]
@@ -77,10 +81,20 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
       // check if word is correct
       const columnLength = words[rowIndex].length
       const correctWord = word.split('/')
+      const ENGLISH_WORD = columnIndex
 
       if (word === value || correctWord.includes(value.toLowerCase())) {
         setCorrectTyped(true)
         setIsWrong(false)
+
+        console.log({ columnIndex, rowIndex })
+
+        // If the column of the table belongs to eng word, display "eng" voice, otherwise display "spa" voice
+        if (columnIndex === ENGLISH_WORD) {
+          speechSynthesisEng(word)
+        } else {
+          speechSynthesisSpa(word)
+        }
 
         if (columnLength - columnFocus > 2) {
           setColumnFocus(columnFocus + 1)

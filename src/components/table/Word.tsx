@@ -1,6 +1,10 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { GlobalContext, IContext } from '../../context/GlobalContext'
+import {
+  speechSynthesisEng,
+  speechSynthesisSpa
+} from '../../utils/speechSynthesis'
 
 interface Props {
   word: string
@@ -24,17 +28,14 @@ export const Word = ({ word, columnIndex }: Props) => {
   const { words, columnNames } = useContext(GlobalContext) as IContext
 
   const handleClick = () => {
-    if (!window.speechSynthesis) return
-
     const columnLength = words[0].length
-    const utterance = new SpeechSynthesisUtterance(word)
 
+    // Check if the word is english (column length - columnIndex must be greater than 1)
     if (columnLength - columnIndex > 1) {
-      speechSynthesis.speak(utterance)
+      speechSynthesisEng(word)
     } else {
-      const synth = speechSynthesis
-      utterance.voice = synth.getVoices()[0]
-      synth.speak(utterance)
+      // Spanish voice
+      speechSynthesisSpa(word)
     }
   }
 
