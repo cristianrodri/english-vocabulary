@@ -33,8 +33,8 @@ export const Context: FC<Props> = ({ children, data, langColumns }) => {
   const [rowFocus, setRowFocus] = useState(0)
   const [columnFocus, setColumnFocus] = useState(0)
 
-  const showInputs = (columnIndex: number[]) => {
-    setShowColumnInput(columnIndex)
+  const showInputs = (columnIndexes: number[]) => {
+    setShowColumnInput(columnIndexes)
   }
 
   const reset = () => {

@@ -67,6 +67,7 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
   }, [showColumnInputs])
 
   useEffect(() => {
+    // Show focus to input if rowIndex is equal to rowFocus, the same with columnIndex and columnFocus, the columnIndex is included into showColumnInputs global context array
     if (
       rowIndex === rowFocus &&
       columnIndex === columnFocus &&
@@ -81,29 +82,31 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
       // check if word is correct
       const columnLength = words[rowIndex].length
       const correctWord = word.split('/')
-      const ENGLISH_WORD = columnIndex
 
       if (word === value || correctWord.includes(value.toLowerCase())) {
         setCorrectTyped(true)
         setIsWrong(false)
 
-        console.log({ columnIndex, rowIndex })
-
-        // If the column of the table belongs to eng word, display "eng" voice, otherwise display "spa" voice
-        if (columnIndex === ENGLISH_WORD) {
-          speechSynthesisEng(word)
-        } else {
-          speechSynthesisSpa(word)
-        }
-
+        // Focus the next column (used in verbs columns)
         if (columnLength - columnFocus > 2) {
           setColumnFocus(columnFocus + 1)
+
+          // The column of the table belongs to ENG word, so english voice should be displayed
+          speechSynthesisEng(word)
         } else if (columnFocus === columnLength - 1) {
+          // The last input columns is showed, therefore it must focus the last column of next row
           setRowFocus(rowFocus + 1)
           setColumnFocus(columnLength - 1)
+
+          // The column of the table belongs to SPA word, so spanish voice should be displayed
+          speechSynthesisSpa(word)
         } else {
+          // Focus first column of the next row
           setRowFocus(rowFocus + 1)
           setColumnFocus(0)
+
+          // The column of the table belongs to ENG word, so english voice should be displayed
+          speechSynthesisEng(word)
         }
       } else {
         setIsWrong(true)

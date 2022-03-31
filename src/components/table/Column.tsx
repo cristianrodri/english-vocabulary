@@ -18,6 +18,7 @@ const Td = styled.td`
 
 export const Column = ({ word, columnIndex, rowIndex }: ColumnProps) => (
   <Td>
+    {/* Only add Saved component to the first column (Saved component is placed to the left) */}
     {columnIndex === 0 && <Saved rowIndex={rowIndex} />}
     <Word word={word} columnIndex={columnIndex} />
     <Input word={word} rowIndex={rowIndex} columnIndex={columnIndex} />
