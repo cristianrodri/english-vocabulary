@@ -1,8 +1,8 @@
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Layout from '../components/Layout'
 import { customTitle } from '../utils/strings'
 import { Container } from '../components/table/Container'
-import { getSheetData, getSheetNames } from './../services/sheets'
+import { getSheetData } from './../services/sheets'
 import { Context } from '../context/GlobalContext'
 export interface StaticProps {
   title: string
@@ -10,19 +10,7 @@ export interface StaticProps {
   langColumns: string[]
 }
 
-// Get all titles from Sheet names
-export const getStaticPaths: GetStaticPaths = async () => {
-  const titles = await getSheetNames()
-
-  const paths = titles.map(title => ({ params: { type: title } }))
-
-  return {
-    paths,
-    fallback: false
-  }
-}
-
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   StaticProps,
   { type: string }
 > = async context => {
@@ -31,7 +19,7 @@ export const getStaticProps: GetStaticProps<
   // Get all data from specific type of word on the Sheet
   const { words, langColumns, title } = await getSheetData(titleParams)
 
-  return { props: { title, words, langColumns }, revalidate: 1 }
+  return { props: { title, words, langColumns } }
 }
 
 const VocabularyType = ({ title, words, langColumns }: StaticProps) => {
