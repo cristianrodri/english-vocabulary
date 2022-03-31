@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import { GlobalContext } from '../../context/GlobalContext'
 import { Column } from './Column'
 
 interface Props {
@@ -17,10 +19,19 @@ const Tr = styled.tr`
   }
 `
 
-export const Row = ({ eachWord, rowIndex }: Props) => (
-  <Tr>
-    {eachWord.map((word, i) => (
-      <Column key={word} word={word} columnIndex={i} rowIndex={rowIndex} />
-    ))}
-  </Tr>
-)
+export const Row = ({ eachWord, rowIndex }: Props) => {
+  const { langColumns } = useContext(GlobalContext)
+  return (
+    <Tr>
+      {/* Some columns may have the same word (regular verbs and other), so the key prop has the word + langColumn name */}
+      {eachWord.map((word, i) => (
+        <Column
+          key={word + langColumns[i]}
+          word={word}
+          columnIndex={i}
+          rowIndex={rowIndex}
+        />
+      ))}
+    </Tr>
+  )
+}
