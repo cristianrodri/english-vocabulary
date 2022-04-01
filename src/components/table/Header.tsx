@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { GlobalContext } from '../../context/GlobalContext'
+import { GlobalContext } from '@context/GlobalContext'
 
 const Row = styled.tr`
   background-color: var(--third-color);

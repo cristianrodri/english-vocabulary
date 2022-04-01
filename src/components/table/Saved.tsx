@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import { FC, useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { GlobalContext } from '../../context/GlobalContext'
-import { getWordsStorage } from '../../utils/storage'
+import { GlobalContext } from '@context/GlobalContext'
+import { getWordsStorage } from '@utils/storage'
 
 interface Props {
   rowIndex: number

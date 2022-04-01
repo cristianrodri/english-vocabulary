@@ -1,10 +1,7 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { GlobalContext } from '../../context/GlobalContext'
-import {
-  speechSynthesisEng,
-  speechSynthesisSpa
-} from '../../utils/speechSynthesis'
+import { GlobalContext } from '@context/GlobalContext'
+import { speechSynthesisEng, speechSynthesisSpa } from '@utils/speechSynthesis'
 
 interface Props {
   word: string

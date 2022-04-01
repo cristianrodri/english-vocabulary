@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next'
-import Layout from '../components/Layout'
-import { customTitle } from '../utils/strings'
-import { Container } from '../components/table/Container'
-import { getSheetData } from './../services/sheets'
-import { Context } from '../context/GlobalContext'
+import Layout from '@components/Layout'
+import { Container } from '@components/table/Container'
+import { customTitle } from '@utils/strings'
+import { getSheetData } from '@services/sheets'
+import { Context } from '@context/GlobalContext'
 export interface StaticProps {
   title: string
   words: string[][]

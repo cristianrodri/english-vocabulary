@@ -1,8 +1,8 @@
-import Layout from '../components/Layout'
+import Layout from '@components/Layout'
 import styled from 'styled-components'
 import { GetStaticProps } from 'next'
-import Card from '../components/Card'
-import { getSheetNames } from '../services/sheets'
+import Card from '@components/Card'
+import { getSheetNames } from '@services/sheets'
 
 interface Props {
   titles: string[]

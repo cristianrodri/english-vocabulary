@@ -1,6 +1,6 @@
 import { AppProps } from 'next/app'
 import NextNprogress from 'nextjs-progressbar'
-import '../styles/styles.css'
+import '@styles/styles.css'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (

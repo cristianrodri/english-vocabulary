@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import { getWordsStorage } from '../../utils/storage'
-import { GlobalContext } from '../../context/GlobalContext'
+import { getWordsStorage } from '@utils/storage'
+import { GlobalContext } from '@context/GlobalContext'
 
 const Container = styled.div`
   display: flex;

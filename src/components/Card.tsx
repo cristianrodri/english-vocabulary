@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { FC } from 'react'
-import { customTitle } from '../utils/strings'
+import { customTitle } from '@utils/strings'
 import Image from 'next/image'
 
 const Article = styled.article`

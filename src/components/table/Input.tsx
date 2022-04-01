@@ -2,11 +2,8 @@ import { KeyboardEvent, useContext, useEffect, useRef, useState } from 'react'
 import { FaEye } from 'react-icons/fa'
 import styled from 'styled-components'
 import { ColumnProps } from './Column'
-import { GlobalContext } from '../../context/GlobalContext'
-import {
-  speechSynthesisEng,
-  speechSynthesisSpa
-} from '../../utils/speechSynthesis'
+import { GlobalContext } from '@context/GlobalContext'
+import { speechSynthesisEng, speechSynthesisSpa } from '@utils/speechSynthesis'
 
 interface InputProps {
   showedColumns: number[]
