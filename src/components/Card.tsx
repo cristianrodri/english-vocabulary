@@ -29,8 +29,8 @@ const H2 = styled.h2`
   color: var(--primary-color-alpha);
   background-image: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.8),
-    rgba(228, 51, 111, 0.8)
+    var(--bg-card-inner),
+    var(--bg-card-outer)
   );
   transform: scale(1);
   transition: all 0.3s ease-out;

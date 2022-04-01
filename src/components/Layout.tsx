@@ -32,7 +32,7 @@ const Header = styled.header`
 `
 
 const H1 = styled.h1`
-  color: #eee;
+  color: var(--banner-title);
 `
 
 const Layout: FC<{ title: string; banner?: string }> = ({

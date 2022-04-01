@@ -25,7 +25,8 @@ const StyledInput = styled.input<InputProps>`
   width: 100%;
   border: 0;
   text-align: center;
-  background-color: ${props => (props.isWrong ? 'var(--wrong)' : '#fff')};
+  background-color: ${props =>
+    props.isWrong ? 'var(--wrong)' : 'var(--bg-input)'};
   font-size: 1rem;
   display: ${props =>
     props.showedColumns.includes(props.columnIndex) && !props.correctTyped

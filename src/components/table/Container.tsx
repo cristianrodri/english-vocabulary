@@ -13,7 +13,7 @@ const Main = styled.main`
 const Title = styled.h2`
   text-align: center;
   margin-top: 0.8rem;
-  color: #fff;
+  color: var(--table-title);
 `
 
 const Table = styled.table`

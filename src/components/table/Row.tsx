@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Tr = styled.tr`
-  --bg-color: #131413;
+  --bg-color: hsl(120, 2%, 7%);
   color: white;
   font-size: var(--little-big);
   background-color: var(--bg-color);

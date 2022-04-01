@@ -6,7 +6,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <NextNprogress
-        color="#282d31"
+        color="var(--primary-color)"
         startPosition={0.3}
         stopDelayMs={200}
         height={3}

@@ -9,7 +9,7 @@ const Row = styled.tr`
 const ColumnHeader = styled.th`
   padding: 0.3em;
   font-weight: 700;
-  color: hsl(0, 15%, 94%);
+  color: var(--table-header-color);
 
   @media screen and (max-width: 680px) {
     font-size: 0.9em;

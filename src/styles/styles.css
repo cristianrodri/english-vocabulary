@@ -12,6 +12,13 @@
   --blue-color: #1492f5;
   --blue-color-alpha: rgba(20, 146, 245, 0.8);
   --wrong: rgb(190, 48, 48);
+  --bg-card-inner: rgba(255, 255, 255, 0.8);
+  --bg-card-outer: rgba(228, 51, 111, 0.8);
+  --banner-title: #eee;
+  --action-button: #fff;
+  --table-title: #fff;
+  --table-header-color: hsl(0, 15%, 94%);
+  --bg-input: #fff;
   --gutter: 16px;
   --h1: 1.4rem;
   --h2: 1.2rem;
