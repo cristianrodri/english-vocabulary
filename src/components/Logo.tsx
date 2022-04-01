@@ -6,9 +6,6 @@ export const Logo = () => {
       </span>
       <style jsx>{`
         .container {
-          position: absolute;
-          top: 0;
-          left: 0;
           padding: 2rem;
           color: var(--primary-color);
           font-size: 1.3rem;

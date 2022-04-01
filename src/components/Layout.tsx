@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Logo } from './Logo'
 import styled from 'styled-components'
 import { customTitle } from '@utils/strings'
+import { NavBar } from './NavBar'
 
 const ImageContainer = styled.div`
   position: absolute;
@@ -46,13 +47,7 @@ const Layout: FC<{ title: string; banner?: string }> = ({
       <link rel="shortcut icon" href="/logo.png" />
     </Head>
     <Header>
-      <nav>
-        <Link href="/">
-          <a>
-            <Logo />
-          </a>
-        </Link>
-      </nav>
+      <NavBar />
       <ImageContainer>
         <Image src={`/${banner}.jpg`} layout="fill" objectFit="cover" />
       </ImageContainer>
