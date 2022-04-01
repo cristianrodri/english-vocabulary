@@ -23,7 +23,7 @@ const Button = styled.button`
   cursor: pointer;
   background-color: transparent;
   font-size: var(--base);
-  color: #fff;
+  color: var(--action-button);
   outline: none;
   border: none;
   border-bottom: 1px solid currentColor;
@@ -50,12 +50,15 @@ export const Actions = () => {
   let columnFocus: number
 
   if (isIrregularAndCommonVerbs) {
+    // showInputs global array should have column 0, 1, 2 in english words and column 3 in spanish words
     englishArr = [0, 1, 2]
     spanishArr = [3]
   } else if (isRegularVerbs) {
+    // showInputs global array should have column 0, 1 in english words and column 2 in spanish words
     englishArr = [0, 1]
     spanishArr = [2]
   } else {
+    // showInputs global array should have column 0 in english words and column 1 in spanish words
     englishArr = [0]
     spanishArr = [1]
   }
@@ -67,11 +70,9 @@ export const Actions = () => {
     } else {
       showInputs(spanishArr)
 
-      isIrregularAndCommonVerbs
-        ? (columnFocus = 3)
-        : isRegularVerbs
-        ? (columnFocus = 2)
-        : (columnFocus = 1)
+      if (isIrregularAndCommonVerbs) columnFocus = 3
+      else if (isRegularVerbs) columnFocus = 2
+      else columnFocus = 1
     }
 
     setColumnFocus(columnFocus)
@@ -80,7 +81,7 @@ export const Actions = () => {
   const handleFiltered = () => {
     const storage = getWordsStorage(pathname)
 
-    // filter words by NOT learned yet (by checking if exists in localStorage)
+    // filter words by NOT learned yet (by checking if it exists in localStorage)
     const filteredWords = words.filter(word => storage.includes(word.join('=')))
 
     if (filteredWords.length > 0) setWords(filteredWords)
