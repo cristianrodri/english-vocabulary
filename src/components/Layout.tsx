@@ -1,8 +1,6 @@
 import { FC } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import Image from 'next/image'
-import { Logo } from './Logo'
 import styled from 'styled-components'
 import { customTitle } from '@utils/strings'
 import { NavBar } from './NavBar'
