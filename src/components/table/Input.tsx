@@ -81,7 +81,10 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
       const columnLength = words[rowIndex].length
       const correctWord = word.split('/')
 
-      if (word === value || correctWord.includes(value.toLowerCase())) {
+      if (
+        word.toLowerCase() === value.toLowerCase() ||
+        correctWord.includes(value)
+      ) {
         setCorrectTyped(true)
         setIsWrong(false)
 
