@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { ColumnProps } from './Column'
 import { GlobalContext } from '@context/GlobalContext'
 import { speechSynthesisEng, speechSynthesisSpa } from '@utils/speechSynthesis'
+import { normalizeSpanishAccent } from '@utils/strings'
 
 interface InputProps {
   showedColumns: number[]
@@ -77,13 +78,16 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
 
   const checkWord = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
-      // check if word is correct
       const columnLength = words[rowIndex].length
-      const correctWord = word.split('/')
 
+      // Replace spanish accent to normal letter (in case the word to compare applies to spanish)
+      const normalizedWord = normalizeSpanishAccent(word)
+      const normalizedValue = normalizeSpanishAccent(value)
+
+      // check if word is correct
       if (
-        word.toLowerCase() === value.toLowerCase() ||
-        correctWord.includes(value)
+        normalizedWord.toLowerCase() === normalizedValue.toLowerCase() ||
+        normalizedWord.includes(normalizedValue)
       ) {
         setCorrectTyped(true)
         setIsWrong(false)
