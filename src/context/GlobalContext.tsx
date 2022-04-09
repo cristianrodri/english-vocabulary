@@ -13,6 +13,7 @@ interface Props {
 }
 
 export interface IContext {
+  originalData: string[][]
   words: string[][]
   langColumns: string[]
   showColumnInputs: number[]
@@ -53,6 +54,7 @@ export const Context: FC<Props> = ({ children, data, langColumns }) => {
   return (
     <GlobalContext.Provider
       value={{
+        originalData: data,
         words,
         langColumns,
         showColumnInputs,

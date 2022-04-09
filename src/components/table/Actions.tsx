@@ -35,9 +35,13 @@ const Button = styled.button`
 `
 
 export const Actions = () => {
-  const { words, showInputs, setColumnFocus, setWords } = useContext(
-    GlobalContext
-  )
+  const {
+    originalData,
+    words,
+    showInputs,
+    setColumnFocus,
+    setWords
+  } = useContext(GlobalContext)
   const router = useRouter()
   const pathname = router.query.type as string
   const isNumbers = pathname === 'numbers'
@@ -81,10 +85,15 @@ export const Actions = () => {
   const handleFiltered = () => {
     const storage = getWordsStorage(pathname)
 
-    // filter words by NOT learned yet (by checking if it exists in localStorage)
+    // Filter words by NOT learned yet (by checking if it exists in localStorage)
     const filteredWords = words.filter(word => storage.includes(word.join('=')))
 
     if (filteredWords.length > 0) setWords(filteredWords)
+  }
+
+  // Print the table with original data
+  const handleOriginal = () => {
+    setWords([...originalData])
   }
 
   return (
@@ -100,6 +109,7 @@ export const Actions = () => {
         </Practice>
       )}
       <Button onClick={handleFiltered}>Filter not learned words</Button>
+      <Button onClick={handleOriginal}>Original table</Button>
     </Container>
   )
 }
