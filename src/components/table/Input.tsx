@@ -80,14 +80,14 @@ export const Input = ({ word, columnIndex, rowIndex }: ColumnProps) => {
     if (e.key === 'Enter') {
       const columnLength = words[rowIndex].length
 
-      // Replace spanish accent to normal letter (in case the word to compare applies to spanish)
-      const normalizedWord = normalizeSpanishAccent(word)
-      const normalizedValue = normalizeSpanishAccent(value)
+      // Replace spanish accent to normal letter (in case the word to compare applies to spanish) and make it lowercase
+      const normalizedWord = normalizeSpanishAccent(word).toLowerCase()
+      const normalizedValue = normalizeSpanishAccent(value).toLowerCase()
 
       // check if word is correct
       if (
-        normalizedWord.toLowerCase() === normalizedValue.toLowerCase() ||
-        normalizedWord.includes(normalizedValue)
+        normalizedWord === normalizedValue ||
+        normalizedWord.split('\n').includes(normalizedValue)
       ) {
         setCorrectTyped(true)
         setIsWrong(false)
