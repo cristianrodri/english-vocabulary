@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import styled from 'styled-components'
 import { GlobalContext } from '@context/GlobalContext'
 import { speechSynthesisEng, speechSynthesisSpa } from '@utils/speechSynthesis'
+import { capitalizedText } from '@utils/strings'
 
 interface Props {
   word: string
@@ -38,7 +39,7 @@ export const Word = ({ word, columnIndex }: Props) => {
 
   return (
     <Styled onClick={handleClick} columnLength={langColumns.length}>
-      {word}
+      {word.toLowerCase()}
     </Styled>
   )
 }
