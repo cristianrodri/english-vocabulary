@@ -96,6 +96,11 @@ export const Actions = () => {
     setWords([...originalData])
   }
 
+  // Shuffle the table words
+  const handleShuffle = () => {
+    setWords([...words].sort(() => Math.random() - 0.5))
+  }
+
   return (
     <Container>
       {!isAlphabet && (
@@ -110,6 +115,7 @@ export const Actions = () => {
       )}
       <Button onClick={handleFiltered}>Filter not learned words</Button>
       <Button onClick={handleOriginal}>Original table</Button>
+      <Button onClick={handleShuffle}>Shuffle table</Button>
     </Container>
   )
 }
