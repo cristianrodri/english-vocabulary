@@ -10,6 +10,7 @@ interface Props {
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
   const titles = await getSheetNames()
+
   return {
     props: {
       titles

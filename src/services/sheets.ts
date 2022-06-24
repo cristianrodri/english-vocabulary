@@ -1,46 +1,29 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet'
-
-interface SheetData {
-  title: string
-  langColumns: string[]
-  words: string[][]
-}
-
-const getSheets = async (): Promise<GoogleSpreadsheet> => {
-  const doc = new GoogleSpreadsheet(process.env.SHEET_ID)
-
-  const private_key = process.env.GOOGLE_PRIVATE_KEY as string
-
-  await doc.useServiceAccountAuth({
-    client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL as string,
-    private_key: private_key.replace(/\\n/g, '\n')
-  })
-
-  await doc.loadInfo()
-
-  return doc
+interface RowData {
+  c: { v: string | number }[]
 }
 
 export const getSheetNames = async () => {
-  const doc = await getSheets()
+  const data = await getSheetData('sheetNames')
 
-  // const docTitlesSheets = doc.sheetsByTitle
-  const titles = Object.keys(doc.sheetsByTitle).sort()
+  const titles = data.slice(1).flat().sort() as string[]
 
   return titles
 }
 
-export const getSheetData = async (pathname: string) => {
-  const doc = await getSheets()
+export const getSheetData = async (sheetName: string) => {
+  const url = `https://docs.google.com/spreadsheets/d/1-Hq4oMd6J1qhcCvbS0ZiUdrbrzuvfKLiameA2dDXcL8/gviz/tq?sheet=${sheetName}`
 
-  // Get individual sheet data
-  const data = await doc.sheetsByTitle[pathname].getRows()
+  try {
+    const res = await fetch(url)
+    const respData = await res.text()
+    const data = JSON.parse(respData.substring(47).slice(0, -2))
 
-  const client: SheetData = {
-    title: data[0]._sheet._rawProperties.title,
-    langColumns: data[0]._sheet.headerValues,
-    words: data.map(row => row._rawData)
+    const words = data.table.rows.map((row: RowData) => {
+      return row.c.map(cell => cell.v)
+    })
+
+    return words
+  } catch (error) {
+    console.log(error)
   }
-
-  return client
 }
