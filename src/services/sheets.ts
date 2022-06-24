@@ -19,7 +19,7 @@ export const getSheetData = async (sheetName: string) => {
     const data = JSON.parse(respData.substring(47).slice(0, -2))
 
     const words = data.table.rows.map((row: RowData) => {
-      return row.c.map(cell => cell.v)
+      return row.c.map(cell => cell.v.toString())
     })
 
     return words
