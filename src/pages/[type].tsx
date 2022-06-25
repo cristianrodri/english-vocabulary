@@ -4,6 +4,8 @@ import { Container } from '@components/table/Container'
 import { customTitle } from '@utils/strings'
 import { getSheetData, getSheetNames } from '@services/sheets'
 import { Context } from '@context/GlobalContext'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
 export interface StaticProps {
   title: string
   words: string[][]
@@ -21,7 +23,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false
+    fallback: true
   }
 }
 
@@ -31,16 +33,47 @@ export const getStaticProps: GetStaticProps<
 > = async context => {
   const title = context.params?.type as string
 
-  // Get all data from specific type of word on the Sheet
-  const rows = await getSheetData(title)
+  // Get all data from specific sheet name
+  const rows = await getSheetData(title, true)
+
+  if (!rows) {
+    return {
+      notFound: true
+    }
+  }
+
   const words = rows.slice(1)
   const langColumns = rows.slice(0, 1)[0]
 
-  return { props: { title, words, langColumns } }
+  return {
+    props: { title, words, langColumns },
+    revalidate: 1
+  }
 }
 
 const VocabularyType = ({ title, words, langColumns }: StaticProps) => {
-  const customizedTitle = customTitle(title)
+  const { isFallback } = useRouter()
+
+  const customizedTitle = isFallback ? 'Loading...' : customTitle(title)
+  if (isFallback) {
+    return (
+      <>
+        <Head>
+          <title>Loading...</title>
+        </Head>
+        <h1
+          style={{
+            marginTop: '1rem',
+            textAlign: 'center',
+            color: 'var(--secondary-color)',
+            fontSize: '20px'
+          }}
+        >
+          Loading...
+        </h1>
+      </>
+    )
+  }
 
   return (
     <Context data={words} langColumns={langColumns}>
