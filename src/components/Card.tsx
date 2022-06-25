@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { FC } from 'react'
 import { customTitle } from '@utils/strings'
 import Image from 'next/image'
+import { bannerUrl } from '@utils/banner'
 
 const Article = styled.article`
   position: relative;
@@ -44,7 +45,12 @@ const Card: FC<{ title: string }> = ({ title }) => {
   return (
     <Article>
       <ImageContainer>
-        <Image src={`/${title}.jpg`} width={300} height={200} alt={title} />
+        <Image
+          src={`/${bannerUrl(title)}`}
+          width={300}
+          height={200}
+          alt={title}
+        />
       </ImageContainer>
       <Link href={`/${title}`}>
         <a>

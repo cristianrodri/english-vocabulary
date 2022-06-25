@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import { customTitle } from '@utils/strings'
 import { NavBar } from './NavBar'
+import { bannerUrl } from '@utils/banner'
 
 const ImageContainer = styled.div`
   position: absolute;
@@ -34,25 +35,31 @@ const H1 = styled.h1`
   color: var(--banner-title);
 `
 
-const Layout: FC<{ title: string; banner?: string }> = ({
+const Layout: FC<{ title: string; banner: string }> = ({
   children,
   title,
   banner
-}) => (
-  <>
-    <Head>
-      <title>{title} - English Vocabulary</title>
-      <link rel="shortcut icon" href="/logo.png" />
-    </Head>
-    <Header>
-      <NavBar />
-      <ImageContainer>
-        <Image src={`/${banner}.jpg`} layout="fill" objectFit="cover" />
-      </ImageContainer>
-      <H1>{customTitle(title)}</H1>
-    </Header>
-    {children}
-  </>
-)
+}) => {
+  return (
+    <>
+      <Head>
+        <title>{title} - English Vocabulary</title>
+        <link rel="shortcut icon" href="/logo.png" />
+      </Head>
+      <Header>
+        <NavBar />
+        <ImageContainer>
+          <Image
+            src={`/${bannerUrl(banner)}`}
+            layout="fill"
+            objectFit="cover"
+          />
+        </ImageContainer>
+        <H1>{customTitle(title)}</H1>
+      </Header>
+      {children}
+    </>
+  )
+}
 
 export default Layout
