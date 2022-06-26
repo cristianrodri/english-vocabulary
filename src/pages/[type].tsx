@@ -6,6 +6,7 @@ import { getSheetData, getSheetNames } from '@services/sheets'
 import { Context } from '@context/GlobalContext'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+
 export interface StaticProps {
   title: string
   words: string[][]
@@ -42,7 +43,9 @@ export const getStaticProps: GetStaticProps<
     }
   }
 
-  const words = rows.slice(1)
+  const words = rows
+    .slice(1)
+    .sort((a: string[], b: string[]) => (a[0] < b[0] ? -1 : 1))
   const langColumns = rows.slice(0, 1)[0]
 
   return {
