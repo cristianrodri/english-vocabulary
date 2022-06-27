@@ -4,6 +4,8 @@ import { GlobalContext } from '@context/GlobalContext'
 import { Actions } from './Actions'
 import { Header } from './Header'
 import { Row } from './Row'
+import { PracticeWord } from './PracticeWord'
+import { PracticeWordNum } from './PracticeWordNum'
 
 const Main = styled.main`
   margin-right: var(--gutter);
@@ -34,6 +36,8 @@ export const Container = () => {
     <Main>
       <Title>Translations ({words.length})</Title>
       <Actions />
+      <PracticeWordNum />
+      <PracticeWord />
       <Table>
         <Header />
         <tbody>

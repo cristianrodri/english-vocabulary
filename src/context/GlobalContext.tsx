@@ -24,6 +24,8 @@ export interface IContext {
   setColumnFocus: Dispatch<SetStateAction<number>>
   setWords: Dispatch<SetStateAction<string[][]>>
   reset: () => void
+  wordsToPractice: number
+  setWordsToPractice: Dispatch<SetStateAction<number>>
 }
 
 export const GlobalContext = createContext({} as IContext)
@@ -33,6 +35,7 @@ export const Context: FC<Props> = ({ children, data, langColumns }) => {
   const [words, setWords] = useState(data)
   const [rowFocus, setRowFocus] = useState(0)
   const [columnFocus, setColumnFocus] = useState(0)
+  const [wordsToPractice, setWordsToPractice] = useState(10)
 
   const showInputs = (columnIndexes: number[]) => {
     setShowColumnInput(columnIndexes)
@@ -64,7 +67,9 @@ export const Context: FC<Props> = ({ children, data, langColumns }) => {
         reset,
         setWords,
         setRowFocus,
-        setColumnFocus
+        setColumnFocus,
+        setWordsToPractice,
+        wordsToPractice
       }}
     >
       {children}
