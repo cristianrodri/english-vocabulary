@@ -1,6 +1,6 @@
 import { GlobalContext } from '@context/GlobalContext'
 import { shuffleArray } from '@utils/arrays'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import Select, { SingleValue } from 'react-select'
 import styled from 'styled-components'
 
@@ -17,30 +17,47 @@ const Container = styled.div`
 export const PracticeWord = () => {
   const { originalData, wordsToPractice, setWords } = useContext(GlobalContext)
 
-  const options: Option[] = []
+  const memoizedOptions = useMemo(() => {
+    const options: Option[] = []
 
-  Array.from({
-    length: Math.ceil(originalData.length / wordsToPractice)
-  }).forEach((_, i, arr) => {
-    const option = {
-      value: i,
-      label: `${1 + wordsToPractice * i}-${
-        i === arr.length - 1 ? originalData.length : wordsToPractice * (i + 1)
-      }`
-    }
+    Array.from({
+      length: Math.ceil(originalData.length / wordsToPractice)
+    }).forEach((_, i, arr) => {
+      const option = {
+        value: i,
+        label: `${1 + wordsToPractice * i}-${
+          i === arr.length - 1 ? originalData.length : wordsToPractice * (i + 1)
+        }`
+      }
 
-    options.push(option)
-  })
+      options.push(option)
+    })
+    options.push({ value: 'all', label: 'All' })
 
-  options.push({ value: 'all', label: 'All' })
+    return options
+  }, [wordsToPractice])
 
   const [selectedOption, setSelectedOption] = useState<SingleValue<Option>>(
-    options[0]
+    null
   )
 
+  useEffect(() => {
+    // Reset Select option to null when wordsToPractice is changed
+    handleChange(null)
+  }, [wordsToPractice])
+
   const handleChange = (newValue: SingleValue<Option>) => {
+    setSelectedOption(newValue)
+
+    // Reset Select option to null when wordsToPractice is changed
+    if (!newValue) {
+      setWords(originalData)
+
+      return
+    }
+
     const dataToPractice =
-      newValue?.value === 'all'
+      newValue?.value === 'all' || !newValue
         ? shuffleArray(originalData)
         : shuffleArray(
             originalData.slice(
@@ -50,8 +67,6 @@ export const PracticeWord = () => {
           )
 
     setWords(dataToPractice)
-
-    setSelectedOption(newValue)
   }
 
   return (
@@ -59,10 +74,10 @@ export const PracticeWord = () => {
       <Select
         id="practice-word"
         instanceId="practice-word"
-        options={options}
-        // defaultValue={options[0]}
+        options={memoizedOptions}
         value={selectedOption}
         onChange={handleChange}
+        placeholder="Select words to practice..."
       />
     </Container>
   )
