@@ -3,7 +3,7 @@ interface RowData {
 }
 
 export const getSheetNames = async () => {
-  const data = await getSheetData('sheetNames', true)
+  const data = await getSheetData('sheetNames')
 
   const titles = data.slice(1).flat().sort() as string[]
 
