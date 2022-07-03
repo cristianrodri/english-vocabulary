@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps<
   const title = context.params?.type as string
 
   // Get all data from specific sheet name
-  const rows = await getSheetData(title, true)
+  const rows = await getSheetData(title)
 
   if (!rows) {
     return {
