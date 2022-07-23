@@ -1,4 +1,5 @@
 import { GlobalContext } from '@context/GlobalContext'
+import { useDataPractice } from '@custom-hooks/useDataPractice'
 import { useContext } from 'react'
 import Select, { SingleValue } from 'react-select'
 import styled from 'styled-components'
@@ -15,12 +16,13 @@ const Container = styled.div`
 `
 
 export const PracticeWordNum = () => {
-  const { originalData, setWordsToPractice } = useContext(GlobalContext)
+  const { setWordsToPractice } = useContext(GlobalContext)
+  const { calculatedDataLength } = useDataPractice()
 
   const options: Option[] = []
 
   Array.from({
-    length: Math.floor(originalData.length / 10)
+    length: Math.floor(calculatedDataLength / 10)
   }).forEach((_, i) => {
     const option = {
       value: (i + 1) * 10,

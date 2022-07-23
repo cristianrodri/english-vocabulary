@@ -12,6 +12,11 @@ interface Props {
   langColumns: string[]
 }
 
+export enum WordToPracticeType {
+  ORIGINAL = 'original',
+  FILTERED = 'filtered'
+}
+
 export interface IContext {
   originalData: string[][]
   words: string[][]
@@ -26,6 +31,8 @@ export interface IContext {
   reset: () => void
   wordsToPractice: number
   setWordsToPractice: Dispatch<SetStateAction<number>>
+  wordsToPracticeType: WordToPracticeType
+  setWordsToPracticeType: Dispatch<SetStateAction<WordToPracticeType>>
 }
 
 export const GlobalContext = createContext({} as IContext)
@@ -36,6 +43,9 @@ export const Context: FC<Props> = ({ children, data, langColumns }) => {
   const [rowFocus, setRowFocus] = useState(0)
   const [columnFocus, setColumnFocus] = useState(0)
   const [wordsToPractice, setWordsToPractice] = useState(10)
+  const [wordsToPracticeType, setWordsToPracticeType] = useState(
+    WordToPracticeType.ORIGINAL
+  )
 
   const showInputs = (columnIndexes: number[]) => {
     setShowColumnInput(columnIndexes)
@@ -69,7 +79,9 @@ export const Context: FC<Props> = ({ children, data, langColumns }) => {
         setRowFocus,
         setColumnFocus,
         setWordsToPractice,
-        wordsToPractice
+        wordsToPractice,
+        wordsToPracticeType,
+        setWordsToPracticeType
       }}
     >
       {children}

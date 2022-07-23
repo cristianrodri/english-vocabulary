@@ -1,4 +1,5 @@
 import { GlobalContext } from '@context/GlobalContext'
+import { useDataPractice } from '@custom-hooks/useDataPractice'
 import { shuffleArray } from '@utils/arrays'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import Select, { SingleValue } from 'react-select'
@@ -15,18 +16,23 @@ const Container = styled.div`
 `
 
 export const PracticeWord = () => {
-  const { originalData, wordsToPractice, setWords } = useContext(GlobalContext)
+  const { wordsToPractice, wordsToPracticeType, setWords } = useContext(
+    GlobalContext
+  )
+  const { calculatedDataLength, wordsData } = useDataPractice()
 
   const memoizedOptions = useMemo(() => {
     const options: Option[] = []
 
     Array.from({
-      length: Math.ceil(originalData.length / wordsToPractice)
+      length: Math.ceil(calculatedDataLength / wordsToPractice)
     }).forEach((_, i, arr) => {
       const option = {
         value: i,
         label: `${1 + wordsToPractice * i}-${
-          i === arr.length - 1 ? originalData.length : wordsToPractice * (i + 1)
+          i === arr.length - 1
+            ? calculatedDataLength
+            : wordsToPractice * (i + 1)
         }`
       }
 
@@ -35,7 +41,7 @@ export const PracticeWord = () => {
     options.push({ value: 'all', label: 'All' })
 
     return options
-  }, [wordsToPractice])
+  }, [wordsToPractice, wordsToPracticeType])
 
   const [selectedOption, setSelectedOption] = useState<SingleValue<Option>>(
     null
@@ -51,20 +57,23 @@ export const PracticeWord = () => {
 
     // Reset Select option to null when wordsToPractice is changed
     if (!newValue) {
-      setWords(originalData)
+      setWords(wordsData)
 
       return
     }
 
     const dataToPractice =
       newValue?.value === 'all' || !newValue
-        ? shuffleArray(originalData)
+        ? shuffleArray(wordsData)
         : shuffleArray(
-            originalData.slice(
+            wordsData.slice(
               (newValue?.value as number) * wordsToPractice,
               ((newValue?.value as number) + 1) * wordsToPractice
             )
           )
+
+    console.log(dataToPractice)
+    console.log(wordsToPractice)
 
     setWords(dataToPractice)
   }

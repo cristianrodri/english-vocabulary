@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import { getWordsStorage } from '@utils/storage'
-import { GlobalContext } from '@context/GlobalContext'
+import { filteredStorageWords, getWordsStorage } from '@utils/storage'
+import { GlobalContext, WordToPracticeType } from '@context/GlobalContext'
 
 const Container = styled.div`
   display: flex;
@@ -40,7 +40,8 @@ export const Actions = () => {
     words,
     showInputs,
     setColumnFocus,
-    setWords
+    setWords,
+    setWordsToPracticeType
   } = useContext(GlobalContext)
   const router = useRouter()
   const pathname = router.query.type as string
@@ -86,13 +87,17 @@ export const Actions = () => {
     const storage = getWordsStorage(pathname)
 
     // Filter words by NOT learned yet (by checking if it exists in localStorage)
-    const filteredWords = words.filter(word => storage.includes(word.join('=')))
+    const filteredWords = filteredStorageWords(words, storage)
 
-    if (filteredWords.length > 0) setWords(filteredWords)
+    if (filteredWords.length > 0) {
+      setWordsToPracticeType(WordToPracticeType.FILTERED)
+      setWords(filteredWords)
+    }
   }
 
   // Print the table with original data
   const handleOriginal = () => {
+    setWordsToPracticeType(WordToPracticeType.ORIGINAL)
     setWords([...originalData])
   }
 

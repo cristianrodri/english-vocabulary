@@ -22,6 +22,7 @@
     "paths": {
       "@components/*": ["./components/*"],
       "@context/*": ["./context/*"],
+      "@custom-hooks/*": ["./custom-hooks/*"],
       "@services/*": ["./services/*"],
       "@utils/*": ["./utils/*"],
       "@styles/*": ["./styles/*"]
