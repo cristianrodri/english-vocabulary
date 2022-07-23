@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState, useContext } from 'react'
 
 export const useDataPractice = () => {
-  const { originalData, wordsToPracticeType, words } = useContext(GlobalContext)
+  const { originalData, wordsToPracticeType } = useContext(GlobalContext)
   const router = useRouter()
   const pathname = router.query.type as string
   const [storageWords, setStorageWords] = useState<string[]>([])
