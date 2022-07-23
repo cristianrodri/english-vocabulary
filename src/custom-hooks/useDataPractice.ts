@@ -13,12 +13,12 @@ export const useDataPractice = () => {
     setStorageWords(getWordsStorage(pathname))
   }, [])
 
+  const filteredWords = filteredStorageWords(originalData, storageWords)
+
   const calculatedDataLength =
     wordsToPracticeType === WordToPracticeType.ORIGINAL
       ? originalData.length
-      : words.length
-
-  const filteredWords = filteredStorageWords(originalData, storageWords)
+      : filteredWords.length
 
   // The data showed in the table when the user changes the numbers of words in select component. If the wordsToPracticeType is "original" the data showed is related to the original data, otherwise the data shown is related to the filtered data
   const wordsData =
