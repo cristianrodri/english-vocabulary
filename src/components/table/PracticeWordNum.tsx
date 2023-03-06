@@ -21,6 +21,18 @@ export const PracticeWordNum = () => {
 
   const options: Option[] = []
 
+  // Add options from 2 to 9
+  Array.from({
+    length: 8
+  }).forEach((_, i) => {
+    const option = {
+      value: i + 2,
+      label: `${i + 2}`
+    }
+
+    options.push(option)
+  })
+
   Array.from({
     length: Math.floor(calculatedDataLength / 10)
   }).forEach((_, i) => {

@@ -72,9 +72,6 @@ export const PracticeWord = () => {
             )
           )
 
-    console.log(dataToPractice)
-    console.log(wordsToPractice)
-
     setWords(dataToPractice)
   }
 
