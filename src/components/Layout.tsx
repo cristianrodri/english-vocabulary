@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styled from 'styled-components'
@@ -35,11 +35,11 @@ const H1 = styled.h1`
   color: var(--banner-title);
 `
 
-const Layout: FC<{ title: string; banner: string }> = ({
-  children,
-  title,
-  banner
-}) => {
+const Layout: FC<{
+  title: string
+  banner: string
+  children: ReactNode
+}> = ({ children, title, banner }) => {
   return (
     <>
       <Head>

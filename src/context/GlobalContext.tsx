@@ -2,6 +2,7 @@ import {
   createContext,
   Dispatch,
   FC,
+  ReactNode,
   SetStateAction,
   useEffect,
   useState
@@ -10,6 +11,7 @@ import {
 interface Props {
   data: string[][]
   langColumns: string[]
+  children: ReactNode
 }
 
 export enum WordToPracticeType {

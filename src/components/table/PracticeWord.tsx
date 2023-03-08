@@ -16,9 +16,8 @@ const Container = styled.div`
 `
 
 export const PracticeWord = () => {
-  const { wordsToPractice, wordsToPracticeType, setWords } = useContext(
-    GlobalContext
-  )
+  const { wordsToPractice, wordsToPracticeType, setWords } =
+    useContext(GlobalContext)
   const { calculatedDataLength, wordsData } = useDataPractice()
 
   const memoizedOptions = useMemo(() => {
@@ -43,9 +42,8 @@ export const PracticeWord = () => {
     return options
   }, [wordsToPractice, wordsToPracticeType])
 
-  const [selectedOption, setSelectedOption] = useState<SingleValue<Option>>(
-    null
-  )
+  const [selectedOption, setSelectedOption] =
+    useState<SingleValue<Option>>(null)
 
   useEffect(() => {
     // Reset Select option to null when wordsToPractice is changed
